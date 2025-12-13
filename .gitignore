@@ -1,0 +1,14 @@
+###> symfony/framework-bundle ###
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> environment variables ###
+.env.*.local
+.env.local
+###< environment variables ###
+
+###> miscellaneous ###
+/.idea/
+###< miscellaneous ###
