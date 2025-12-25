@@ -1,14 +1,19 @@
-###> symfony/framework-bundle ###
-/public/bundles/
-/var/
-/vendor/
-###< symfony/framework-bundle ###
+###> miscellaneous ###
+/.idea/
+###< miscellaneous ###
 
 ###> environment variables ###
 .env.*.local
 .env.local
 ###< environment variables ###
 
-###> miscellaneous ###
-/.idea/
-###< miscellaneous ###
+###> symfony/framework-bundle ###
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/asset-mapper ###
+/assets/vendor/
+/public/assets/
+###< symfony/asset-mapper ###
