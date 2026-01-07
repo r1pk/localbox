@@ -1,1 +1,5 @@
 @import 'tailwindcss';
+
+.bg-radial-gradient-pattern {
+    background: radial-gradient(125% 125% at 50% 90%, var(--color-zinc-950) 40%, var(--color-emerald-950) 100%);
+}
