@@ -3,9 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\FileRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: FileRepository::class)]
 class File
@@ -17,51 +18,24 @@ class File
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $internalFilename = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $originalFilename = null;
-
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 64)]
     private ?string $token = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $alias = null;
-
-    #[ORM\Column(type: Types::BIGINT)]
-    private ?string $size = null;
+    #[ORM\Column(length: 64)]
+    private ?string $groupToken = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $mimeType = null;
+    private ?string $clientFilename = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $serverFilename = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $directory = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getInternalFilename(): ?string
-    {
-        return $this->internalFilename;
-    }
-
-    public function setInternalFilename(string $internalFilename): static
-    {
-        $this->internalFilename = $internalFilename;
-
-        return $this;
-    }
-
-    public function getOriginalFilename(): ?string
-    {
-        return $this->originalFilename;
-    }
-
-    public function setOriginalFilename(string $originalFilename): static
-    {
-        $this->originalFilename = $originalFilename;
-
-        return $this;
     }
 
     public function getToken(): ?string
@@ -76,39 +50,75 @@ class File
         return $this;
     }
 
-    public function getAlias(): ?string
+    public function getGroupToken(): ?string
     {
-        return $this->alias;
+        return $this->groupToken;
     }
 
-    public function setAlias(?string $alias): static
+    public function setGroupToken(string $groupToken): static
     {
-        $this->alias = $alias;
+        $this->groupToken = $groupToken;
 
         return $this;
     }
 
-    public function getSize(): ?string
+    public function getClientFilename(): ?string
     {
-        return $this->size;
+        return $this->clientFilename;
     }
 
-    public function setSize(string $size): static
+    public function setClientFilename(string $clientFilename): static
     {
-        $this->size = $size;
+        $this->clientFilename = $clientFilename;
 
         return $this;
     }
 
-    public function getMimeType(): ?string
+    public function getServerFilename(): ?string
     {
-        return $this->mimeType;
+        return $this->serverFilename;
     }
 
-    public function setMimeType(string $mimeType): static
+    public function setServerFilename(string $serverFilename): static
     {
-        $this->mimeType = $mimeType;
+        $this->serverFilename = $serverFilename;
 
         return $this;
+    }
+
+    public function getDirectory(): ?string
+    {
+        return $this->directory;
+    }
+
+    public function setDirectory(string $directory): static
+    {
+        $this->directory = $directory;
+
+        return $this;
+    }
+
+    public function getRelativePath(): string
+    {
+        return implode(DIRECTORY_SEPARATOR, [$this->getDirectory(), $this->getServerFilename()]);
+    }
+
+    public static function prepareForUploadedFile(UploadedFile $file, ?string $groupToken): static
+    {
+        $entity = new self();
+
+        $entity->setToken(Uuid::v4()->toRfc4122());
+
+        $entity->setServerFilename(Uuid::v4()->toRfc4122());
+        $entity->setClientFilename($file->getClientOriginalName());
+        $entity->setDirectory(
+            date('Y') . DIRECTORY_SEPARATOR . date('m'),
+        );
+
+        if ($groupToken) {
+            $entity->setGroupToken($groupToken);
+        }
+
+        return $entity;
     }
 }
