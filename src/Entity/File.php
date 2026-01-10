@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\FileRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
@@ -17,51 +16,24 @@ class File
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $internalFilename = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $originalFilename = null;
-
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 64)]
     private ?string $token = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $alias = null;
-
-    #[ORM\Column(type: Types::BIGINT)]
-    private ?string $size = null;
+    #[ORM\Column(length: 255)]
+    private ?string $clientFilename = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $mimeType = null;
+    private ?string $serverFilename = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $storagePath = null;
+
+    #[ORM\Column(length: 64)]
+    private ?string $batchUploadToken = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getInternalFilename(): ?string
-    {
-        return $this->internalFilename;
-    }
-
-    public function setInternalFilename(string $internalFilename): static
-    {
-        $this->internalFilename = $internalFilename;
-
-        return $this;
-    }
-
-    public function getOriginalFilename(): ?string
-    {
-        return $this->originalFilename;
-    }
-
-    public function setOriginalFilename(string $originalFilename): static
-    {
-        $this->originalFilename = $originalFilename;
-
-        return $this;
     }
 
     public function getToken(): ?string
@@ -76,38 +48,50 @@ class File
         return $this;
     }
 
-    public function getAlias(): ?string
+    public function getClientFilename(): ?string
     {
-        return $this->alias;
+        return $this->clientFilename;
     }
 
-    public function setAlias(?string $alias): static
+    public function setClientFilename(string $clientFilename): static
     {
-        $this->alias = $alias;
+        $this->clientFilename = $clientFilename;
 
         return $this;
     }
 
-    public function getSize(): ?string
+    public function getServerFilename(): ?string
     {
-        return $this->size;
+        return $this->serverFilename;
     }
 
-    public function setSize(string $size): static
+    public function setServerFilename(string $serverFilename): static
     {
-        $this->size = $size;
+        $this->serverFilename = $serverFilename;
 
         return $this;
     }
 
-    public function getMimeType(): ?string
+    public function getStoragePath(): ?string
     {
-        return $this->mimeType;
+        return $this->storagePath;
     }
 
-    public function setMimeType(string $mimeType): static
+    public function setStoragePath(string $storagePath): static
     {
-        $this->mimeType = $mimeType;
+        $this->storagePath = $storagePath;
+
+        return $this;
+    }
+
+    public function getBatchUploadToken(): ?string
+    {
+        return $this->batchUploadToken;
+    }
+
+    public function setBatchUploadToken(string $batchUploadToken): static
+    {
+        $this->batchUploadToken = $batchUploadToken;
 
         return $this;
     }
