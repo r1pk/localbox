@@ -17,6 +17,7 @@ export default class extends Controller {
 
     initialize() {
         this._handleAddedFile = this.handleAddedFile.bind(this);
+        this._handleQueueComplete = this.handleQueueComplete.bind(this);
     }
 
     connect() {
@@ -31,7 +32,9 @@ export default class extends Controller {
             previewsContainer: this.previewContainerTarget,
             previewTemplate: this.previewTemplateValue
         });
+
         this.instance.on('addedfile', this._handleAddedFile);
+        this.instance.on('queuecomplete', this._handleQueueComplete);
     }
 
     handleAddedFile() {
@@ -45,6 +48,33 @@ export default class extends Controller {
         }, { once: true });
 
         this.instance.element.classList.add('opacity-0', 'scale-0');
+    }
+
+    handleQueueComplete() {
+        const response = this.getLastAcceptedFileResponse();
+
+        if (!response || !Object.hasOwn(response, 'url')) {
+            return;
+        }
+
+        window.location.href = response.url;
+    }
+
+    getLastAcceptedFileResponse() {
+        const files = this.instance.getAcceptedFiles();
+
+        if (files.length === 0) {
+            return null;
+        }
+
+        const file = files[files.length - 1];
+        const response = file.xhr.responseText;
+
+        if (!response) {
+            return null;
+        }
+
+        return JSON.parse(response);
     }
 
     disconnect() {

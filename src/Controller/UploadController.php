@@ -44,13 +44,7 @@ final class UploadController extends AbstractController
             if ($file !== null) {
                 $entity = $persister->persist($file, $token);
 
-                return $this->json(
-                    [
-                        'token' => $entity->getToken(),
-                        'group_token' => $entity->getGroupToken(),
-                    ],
-                    Response::HTTP_CREATED,
-                );
+                return $this->json(['url' => null], Response::HTTP_CREATED);
             }
 
             return $this->json([]);
