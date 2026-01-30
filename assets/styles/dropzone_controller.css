@@ -1,3 +1,5 @@
 [data-controller='dropzone'] .dz-drag-hover {
     border-color: #007a55;
+    transform: translateY(-0.75rem);
+    box-shadow: 0 25px 50px -12px rgb(0 122 85 / 0.25);
 }
