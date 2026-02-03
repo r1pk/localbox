@@ -15,4 +15,9 @@ class FileRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, File::class);
     }
+
+    public function findByGroupToken(string $token): array
+    {
+        return $this->findBy(['groupToken' => $token]);
+    }
 }

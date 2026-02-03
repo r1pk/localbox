@@ -33,6 +33,9 @@ class File
     #[ORM\Column(length: 255)]
     private ?string $directory = null;
 
+    #[ORM\Column]
+    private ?int $size = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -98,6 +101,18 @@ class File
         return $this;
     }
 
+    public function getSize(): ?int
+    {
+        return $this->size;
+    }
+
+    public function setSize(int $size): static
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
     public function getRelativePath(): string
     {
         return implode(DIRECTORY_SEPARATOR, [$this->getDirectory(), $this->getServerFilename()]);
@@ -114,6 +129,7 @@ class File
         $entity->setDirectory(
             date('Y') . DIRECTORY_SEPARATOR . date('m'),
         );
+        $entity->setSize($file->getSize());
 
         if ($groupToken) {
             $entity->setGroupToken($groupToken);
