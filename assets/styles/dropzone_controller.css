@@ -3,3 +3,11 @@
     transform: translateY(-0.75rem);
     box-shadow: 0 25px 50px -12px rgb(0 122 85 / 0.25);
 }
+
+[data-controller='dropzone'] .dz-success.dz-complete {
+    border-color: #007a55;
+}
+
+[data-controller='dropzone'] .dz-success.dz-complete [data-dz-uploadprogress] {
+    background-color: #009966;
+}
