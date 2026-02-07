@@ -40,6 +40,6 @@ class FileUploader
             $entity = $this->persister->persist($file, $token);
         }
 
-        return new FileUploadResult($entity !== null, $entity, $token);
+        return new FileUploadResult($entity !== null, $token);
     }
 }

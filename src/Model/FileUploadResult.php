@@ -2,24 +2,21 @@
 
 namespace App\Model;
 
-use App\Entity\File;
-
 class FileUploadResult
 {
-    public function __construct(
-        protected bool $isComplete,
-        protected ?File $file = null,
-        protected ?string $groupToken = null,
-    ) {}
+    protected bool $isComplete;
+
+    protected ?string $groupToken = null;
+
+    public function __construct(bool $isComplete, ?string $groupToken = null)
+    {
+        $this->isComplete = $isComplete;
+        $this->groupToken = $groupToken;
+    }
 
     public function isComplete(): bool
     {
         return $this->isComplete;
-    }
-
-    public function getFile(): ?File
-    {
-        return $this->file;
     }
 
     public function getGroupToken(): ?string

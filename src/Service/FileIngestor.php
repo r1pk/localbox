@@ -2,9 +2,6 @@
 
 namespace App\Service;
 
-use App\Exception\ChunkAssemblyException;
-use App\Exception\ChunkStorageException;
-use App\Exception\ChunkValidationException;
 use App\Exception\FileAvailabilityException;
 use App\Exception\FileChunkIntegrityException;
 use App\Exception\FileChunkValidationException;
