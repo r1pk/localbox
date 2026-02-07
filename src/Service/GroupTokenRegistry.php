@@ -11,7 +11,9 @@ class GroupTokenRegistry
 
     const int MAXIMUM_TOKENS_PER_SESSION = 128;
 
-    public function __construct(protected RequestStack $stack) {}
+    public function __construct(
+        protected RequestStack $stack,
+    ) {}
 
     public function issueToken(): string
     {

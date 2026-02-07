@@ -15,15 +15,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FileIngestor
 {
-    protected Filesystem $filesystem;
-
-    protected string $temporaryUploadDirectory;
-
-    public function __construct(Filesystem $filesystem)
-    {
-        $this->filesystem = $filesystem;
-        $this->temporaryUploadDirectory = sys_get_temp_dir();
-    }
+    public function __construct(
+        protected FileLocationProvider $fileLocationProvider,
+        protected Filesystem $filesystem,
+    ) {}
 
     /**
      * @throws FileAvailabilityException
@@ -81,7 +76,7 @@ class FileIngestor
     protected function initializeUpload(UploadedFile $chunk, string $filename): void
     {
         try {
-            $chunk->move($this->temporaryUploadDirectory, $filename);
+            $chunk->move($this->fileLocationProvider->getTemporaryDirectoryPath(), $filename);
         } catch (FileException $exception) {
             throw new FileStorageAccessException(
                 'Failed to initialize chunked upload: ' . $exception->getMessage(), previous: $exception,
@@ -96,7 +91,7 @@ class FileIngestor
     {
         try {
             $this->filesystem->appendToFile(
-                $this->composeAbsolutePath($filename),
+                $this->fileLocationProvider->getTemporaryPath($filename),
                 $chunk->getContent(),
             );
         } catch (IOException $exception) {
@@ -111,7 +106,7 @@ class FileIngestor
      */
     protected function finalizeUpload(string $filename, string $clientOriginalName): UploadedFile
     {
-        $path = $this->composeAbsolutePath($filename);
+        $path = $this->fileLocationProvider->getTemporaryPath($filename);
 
         if (!file_exists($path)) {
             throw new FileAvailabilityException('File does not exist');
@@ -120,10 +115,5 @@ class FileIngestor
         return new UploadedFile(
             $path, $clientOriginalName, mime_content_type($path), null, true,
         );
-    }
-
-    protected function composeAbsolutePath(string $filename): string
-    {
-        return implode(DIRECTORY_SEPARATOR, [$this->temporaryUploadDirectory, $filename]);
     }
 }

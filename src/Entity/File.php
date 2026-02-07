@@ -113,11 +113,6 @@ class File
         return $this;
     }
 
-    public function getRelativePath(): string
-    {
-        return implode(DIRECTORY_SEPARATOR, [$this->getDirectory(), $this->getServerFilename()]);
-    }
-
     public static function prepareForUploadedFile(UploadedFile $file, ?string $groupToken): static
     {
         $entity = new self();

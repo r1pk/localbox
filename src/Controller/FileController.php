@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Exception\ApplicationException;
+use App\Exception\FileAvailabilityException;
+use App\Repository\FileRepository;
+use App\Service\FileDownloader;
 use App\Service\FileUploader;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,6 +31,27 @@ final class FileController extends AbstractController
             }
 
             return $this->json([]);
+        } catch (ApplicationException $exception) {
+            return $this->json($exception->getResponsePayload(), $exception->getResponseStatus());
+        } catch (Exception) {
+            return $this->json(
+                ['error' => 'An unexpected server error occurred'],
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+            );
+        }
+    }
+
+    #[Route('/{token}/download', name: 'app_file_download')]
+    public function download(FileDownloader $downloader, FileRepository $repository, string $token): Response
+    {
+        try {
+            $file = $repository->findByToken($token);
+
+            if ($file === null) {
+                throw new FileAvailabilityException('File does not exist');
+            }
+
+            return $downloader->createBinaryFileResponse($file);
         } catch (ApplicationException $exception) {
             return $this->json($exception->getResponsePayload(), $exception->getResponseStatus());
         } catch (Exception) {
