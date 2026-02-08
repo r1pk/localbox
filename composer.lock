@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8e62b8ed45ecb1ba282a5b181d55598",
+    "content-hash": "343f9d138823ecb909535da64b40de19",
     "packages": [
         {
             "name": "composer/semver",
@@ -5012,16 +5012,16 @@
         },
         {
             "name": "symfony/security-bundle",
-            "version": "v8.0.0",
+            "version": "v8.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-bundle.git",
-                "reference": "fa06c8b5b8e7c1290827a7ac6d16f3203b54e1b2"
+                "reference": "c170650a00ba724be3455852747af600a2f042b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/fa06c8b5b8e7c1290827a7ac6d16f3203b54e1b2",
-                "reference": "fa06c8b5b8e7c1290827a7ac6d16f3203b54e1b2",
+                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/c170650a00ba724be3455852747af600a2f042b4",
+                "reference": "c170650a00ba724be3455852747af600a2f042b4",
                 "shasum": ""
             },
             "require": {
@@ -5088,7 +5088,7 @@
             "description": "Provides a tight integration of the Security component into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-bundle/tree/v8.0.0"
+                "source": "https://github.com/symfony/security-bundle/tree/v8.0.4"
             },
             "funding": [
                 {
@@ -5108,7 +5108,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-14T10:04:00+00:00"
+            "time": "2026-01-10T13:58:55+00:00"
         },
         {
             "name": "symfony/security-core",

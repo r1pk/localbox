@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LocalBox :: Authentication{% endblock %}
+
+{% block main %}
+    <section class="flex min-h-dvh flex-col items-center justify-center">
+        <form method="post" class="flex w-full max-w-md flex-col gap-4 rounded border border-zinc-800 bg-zinc-900 p-4 md:p-8">
+            <header class="mx-8 mt-8 flex flex-col items-center gap-2">
+                <div class="flex size-24 items-center justify-center rounded-full bg-zinc-600 text-emerald-500">
+                    <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 14.5V16.5M7 10.0288C7.47142 10 8.05259 10 8.8 10H15.2C15.9474 10 16.5286 10 17 10.0288M7 10.0288C6.41168 10.0647 5.99429 10.1455 5.63803 10.327C5.07354 10.6146 4.6146 11.0735 4.32698 11.638C4 12.2798 4 13.1198 4 14.8V16.2C4 17.8802 4 18.7202 4.32698 19.362C4.6146 19.9265 5.07354 20.3854 5.63803 20.673C6.27976 21 7.11984 21 8.8 21H15.2C16.8802 21 17.7202 21 18.362 20.673C18.9265 20.3854 19.3854 19.9265 19.673 19.362C20 18.7202 20 17.8802 20 16.2V14.8C20 13.1198 20 12.2798 19.673 11.638C19.3854 11.0735 18.9265 10.6146 18.362 10.327C18.0057 10.1455 17.5883 10.0647 17 10.0288M7 10.0288V8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8V10.0288"></path>
+                    </svg>
+                </div>
+                <h1 class="font-medium text-xl text-zinc-100">Sign in</h1>
+                <p class="text-center text-sm text-zinc-400">
+                    Verification is required to proceed.
+                </p>
+            </header>
+            {% if error %}
+                <div class="rounded border border-red-800 bg-red-900/25 p-2 text-center text-red-400 text-sm">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="rounded border border-emerald-800 bg-emerald-900/25 p-2 text-center text-emerald-400 text-sm">
+                    <span>You are currently authenticated as:</span>
+                    <strong>{{ app.user.userIdentifier }}</strong>
+                </div>
+            {% endif %}
+            <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-2">
+                    <label for="username" class="font-medium text-sm text-zinc-300">Username</label>
+                    <input type="text" name="_username" id="username" autocomplete="username" value="{{ last_username }}" class="w-full rounded border border-zinc-700 bg-zinc-800 p-2 text-zinc-100 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" required autofocus />
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label for="password" class="font-medium text-sm text-zinc-300">Password</label>
+                    <input type="password" name="_password" id="password" autocomplete="current-password" class="w-full rounded border border-zinc-700 bg-zinc-800 p-2 text-zinc-100 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" required />
+                </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" data-controller="csrf-protection" />
+                <button class="cursor-pointer rounded bg-emerald-600 px-4 py-2 font-semibold text-zinc-100 transition-all hover:bg-emerald-500" type="submit">
+                    Sign in
+                </button>
+            </div>
+        </form>
+    </section>
+{% endblock %}
