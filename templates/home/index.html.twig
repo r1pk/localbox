@@ -2,7 +2,7 @@
 
 {% block main %}
     <section class="flex min-h-dvh flex-col items-center justify-center" data-controller="dropzone" data-dropzone-preview-template-value="{{ include('/home/_preview_template.html.twig')|e('html_attr') }}">
-        <form action="{{ path('app_file_upload') }}" class="flex flex-col items-center gap-4 rounded border border-zinc-800 bg-zinc-900 p-4 transition duration-150 hover:border-zinc-700 hover:bg-zinc-800 md:p-8" data-dropzone-target="uploadForm">
+        <form action="{{ path('app_file_upload') }}" class="flex w-full max-w-md flex-col items-center gap-4 rounded border border-zinc-800 bg-zinc-900 p-4 transition duration-150 hover:border-zinc-700 hover:bg-zinc-800 md:p-8" data-dropzone-target="uploadForm">
             <header class="mx-8 mt-8 flex flex-col items-center gap-2">
                 <div class="flex size-24 items-center justify-center rounded-full bg-zinc-600 text-emerald-500">
                     <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
@@ -33,6 +33,6 @@
             </div>
             <input type="hidden" name="group_token" value="{{ group_token }}" />
         </form>
-        <ul class="hidden w-full scale-0 space-y-2 opacity-0 transition duration-150 sm:w-sm" data-dropzone-target="previewContainer"></ul>
+        <ul class="hidden w-full max-w-md scale-0 space-y-2 opacity-0 transition duration-150" data-dropzone-target="previewContainer"></ul>
     </section>
 {% endblock %}
