@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <section class="flex min-h-dvh flex-col items-center justify-center" data-controller="dropzone" data-dropzone-preview-template-value="{{ include('/main/_preview_template.html.twig')|e('html_attr') }}">
+    <section class="flex min-h-dvh flex-col items-center justify-center" data-controller="dropzone" data-dropzone-preview-template-value="{{ include('/home/_preview_template.html.twig')|e('html_attr') }}">
         <form action="{{ path('app_file_upload') }}" class="flex flex-col items-center gap-4 rounded border border-zinc-800 bg-zinc-900 p-4 transition duration-150 hover:border-zinc-700 hover:bg-zinc-800 md:p-8" data-dropzone-target="uploadForm">
             <header class="mx-8 mt-8 flex flex-col items-center gap-2">
                 <div class="flex size-24 items-center justify-center rounded-full bg-zinc-600 text-emerald-500">
