@@ -5,8 +5,8 @@ namespace App\Controller;
 use App\Exception\ApplicationException;
 use App\Exception\FileAvailabilityException;
 use App\Repository\FileRepository;
-use App\Service\FileDownloader;
-use App\Service\FileUploader;
+use App\Service\BinaryFileResponseFactory;
+use App\Service\FileUploadCoordinator;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +17,10 @@ use Symfony\Component\Routing\Attribute\Route;
 final class FileController extends AbstractController
 {
     #[Route('/upload', name: 'app_file_upload')]
-    public function upload(Request $request, FileUploader $uploader): Response
+    public function upload(Request $request, FileUploadCoordinator $coordinator): Response
     {
         try {
-            $result = $uploader->upload($request);
+            $result = $coordinator->upload($request);
 
             if ($result->isComplete()) {
                 $url = $this->generateUrl('app_file_group_show', [
@@ -42,7 +42,7 @@ final class FileController extends AbstractController
     }
 
     #[Route('/{token}/download', name: 'app_file_download')]
-    public function download(FileDownloader $downloader, FileRepository $repository, string $token): Response
+    public function download(BinaryFileResponseFactory $factory, FileRepository $repository, string $token): Response
     {
         try {
             $file = $repository->findByToken($token);
@@ -51,7 +51,7 @@ final class FileController extends AbstractController
                 throw new FileAvailabilityException('File does not exist');
             }
 
-            return $downloader->createBinaryFileResponse($file);
+            return $factory->create($file);
         } catch (ApplicationException $exception) {
             return $this->json($exception->getResponsePayload(), $exception->getResponseStatus());
         } catch (Exception) {

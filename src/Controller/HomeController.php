@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Service\GroupTokenRegistry;
+use App\Service\GroupTokenIssuer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -11,10 +11,10 @@ use Symfony\Component\Routing\Attribute\Route;
 final class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home_index')]
-    public function index(GroupTokenRegistry $registry): Response
+    public function index(GroupTokenIssuer $issuer): Response
     {
         return $this->render('home/index.html.twig', [
-            'group_token' => $registry->issueToken()
+            'group_token' => $issuer->issue()
         ]);
     }
 }

@@ -30,9 +30,6 @@ class File
     #[ORM\Column(length: 255)]
     private ?string $serverFilename = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $directory = null;
-
     #[ORM\Column]
     private ?int $size = null;
 
@@ -89,18 +86,6 @@ class File
         return $this;
     }
 
-    public function getDirectory(): ?string
-    {
-        return $this->directory;
-    }
-
-    public function setDirectory(string $directory): static
-    {
-        $this->directory = $directory;
-
-        return $this;
-    }
-
     public function getSize(): ?int
     {
         return $this->size;
@@ -113,22 +98,16 @@ class File
         return $this;
     }
 
-    public static function prepareForUploadedFile(UploadedFile $file, ?string $groupToken): static
+    public static function prepareForUploadedFile(UploadedFile $file, string $groupToken): static
     {
         $entity = new self();
 
         $entity->setToken(Uuid::v4()->toRfc4122());
+        $entity->setGroupToken($groupToken);
 
         $entity->setServerFilename(Uuid::v4()->toRfc4122());
         $entity->setClientFilename($file->getClientOriginalName());
-        $entity->setDirectory(
-            date('Y') . DIRECTORY_SEPARATOR . date('m'),
-        );
         $entity->setSize($file->getSize());
-
-        if ($groupToken) {
-            $entity->setGroupToken($groupToken);
-        }
 
         return $entity;
     }

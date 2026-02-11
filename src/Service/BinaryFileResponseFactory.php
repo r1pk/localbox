@@ -7,29 +7,29 @@ use App\Exception\FileAvailabilityException;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
-class FileDownloader
+class BinaryFileResponseFactory
 {
     public function __construct(
-        protected FileLocationProvider $fileLocationProvider,
+        protected UploadDirectoryPathResolver $uploadDirectoryPathResolver,
     ) {}
 
     /**
      * @throws FileAvailabilityException
      */
-    public function createBinaryFileResponse(File $file): BinaryFileResponse
+    public function create(File $file): BinaryFileResponse
     {
-        $path = $this->fileLocationProvider->getPath($file);
+        $filename = $file->getClientFilename();
+        $path = implode(DIRECTORY_SEPARATOR, [
+            $this->uploadDirectoryPathResolver->resolve($file),
+            $file->getServerFilename()
+        ]);
 
         if (!file_exists($path)) {
             throw new FileAvailabilityException('File does not exist');
         }
 
         $response = new BinaryFileResponse($path);
-
-        $response->setContentDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $file->getClientFilename(),
-        );
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename);
 
         return $response;
     }
