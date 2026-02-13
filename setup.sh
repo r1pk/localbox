@@ -16,4 +16,7 @@ php bin/console tailwind:build
 echo "4. Clearing the cache..."
 php bin/console cache:clear
 
+echo "5. Loading data fixtures..."
+php bin/console doctrine:fixtures:load
+
 echo "Project setup completed successfully!"
