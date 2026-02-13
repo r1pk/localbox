@@ -6,12 +6,17 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 /**
  * This class provides array-shapes for configuring the services and bundles of an application.
+ *
  * Services declared with the config() method below are autowired and autoconfigured by default.
+ *
  * This is for apps only. Bundles SHOULD NOT use it.
+ *
  * Example:
+ *
  *     ```php
  *     // config/services.php
  *     namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+ *
  *     return App::config([
  *         'services' => [
  *             'App\\' => [
@@ -20,6 +25,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         ],
  *     ]);
  *     ```
+ *
  * @psalm-type ImportsConfig = list<string|array{
  *     resource: string,
  *     type?: string|null,
@@ -1436,16 +1442,20 @@ namespace Symfony\Component\Routing\Loader\Configurator;
 
 /**
  * This class provides array-shapes for configuring the routes of an application.
+ *
  * Example:
+ *
  *     ```php
  *     // config/routes.php
  *     namespace Symfony\Component\Routing\Loader\Configurator;
+ *
  *     return Routes::config([
  *         'controllers' => [
  *             'resource' => 'routing.controllers',
  *         ],
  *     ]);
  *     ```
+ *
  * @psalm-type RouteConfig = array{
  *     path: string|array<string,string>,
  *     controller?: string,
