@@ -6,7 +6,6 @@ use App\Repository\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: FileRepository::class)]
 class File
@@ -18,10 +17,10 @@ class File
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 64)]
+    #[ORM\Column(length: 32)]
     private ?string $token = null;
 
-    #[ORM\Column(length: 64)]
+    #[ORM\Column(length: 32)]
     private ?string $groupToken = null;
 
     #[ORM\Column(length: 255)]
@@ -98,14 +97,10 @@ class File
         return $this;
     }
 
-    public static function prepareForUploadedFile(UploadedFile $file, string $groupToken): static
+    public static function prepareFromUploadedFile(UploadedFile $file): static
     {
         $entity = new self();
 
-        $entity->setToken(Uuid::v4()->toRfc4122());
-        $entity->setGroupToken($groupToken);
-
-        $entity->setServerFilename(Uuid::v4()->toRfc4122());
         $entity->setClientFilename($file->getClientOriginalName());
         $entity->setSize($file->getSize());
 

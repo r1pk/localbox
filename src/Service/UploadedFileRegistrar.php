@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class UploadedFileRegistrar
 {
     public function __construct(
+        protected TokenGenerator $tokenGenerator,
         protected UploadedFileStorage $uploadedFileStorage,
         protected EntityManagerInterface $manager,
     ) {}
@@ -20,7 +21,12 @@ class UploadedFileRegistrar
      */
     public function register(UploadedFile $file, string $groupToken): File
     {
-        $entity = File::prepareForUploadedFile($file, $groupToken);
+        $token = $this->tokenGenerator->generate();
+        $entity = File::prepareFromUploadedFile($file);
+
+        $entity->setToken($token);
+        $entity->setGroupToken($groupToken);
+        $entity->setServerFilename($token);
 
         $this->uploadedFileStorage->store($file, $entity);
 

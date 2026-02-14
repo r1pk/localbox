@@ -15,7 +15,7 @@ class GroupTokenStorage
         protected RequestStack $stack,
     ) {}
 
-    public function add(string $token): void
+    public function add(string $token): string
     {
         $tokens = $this->all();
         $tokens[] = $token;
@@ -25,6 +25,8 @@ class GroupTokenStorage
         }
 
         $this->getSession()->set(self::SESSION_KEY, $tokens);
+
+        return $token;
     }
 
     public function contains(string $token): bool
