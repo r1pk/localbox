@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\File;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -27,8 +28,8 @@ class DashboardController extends AbstractDashboardController
         $dashboard = Dashboard::new();
 
         $dashboard->setTitle('LocalBox');
-        $dashboard->renderContentMaximized();
         $dashboard->setDefaultColorScheme(ColorScheme::DARK);
+        $dashboard->renderContentMaximized();
 
         return $dashboard;
     }
@@ -46,6 +47,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Home', 'fa fa-home');
         yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class);
+        yield MenuItem::linkToCrud('Files', 'fa fa-file', File::class);
     }
 
     public function configureCrud(): Crud
