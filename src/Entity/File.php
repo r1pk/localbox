@@ -29,7 +29,7 @@ class File
     #[ORM\Column(length: 255)]
     private ?string $serverFilename = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'bigint')]
     private ?int $size = null;
 
     public function getId(): ?int
