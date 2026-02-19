@@ -3,7 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\File;
+use App\Exception\FileStorageAccessException;
+use App\Service\FileDeleter;
 use App\Service\FileSizeFormatter;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -17,6 +20,7 @@ class FileCrudController extends AbstractCrudController
 {
     public function __construct(
         protected FileSizeFormatter $formatter,
+        protected FileDeleter $deleter,
     ) {}
 
     public static function getEntityFqcn(): string
@@ -81,5 +85,19 @@ class FileCrudController extends AbstractCrudController
         $createdAt->hideOnForm();
 
         yield $createdAt;
+    }
+
+    /**
+     * @throws FileStorageAccessException
+     */
+    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if ($entityInstance instanceof File) {
+            $this->deleter->delete($entityInstance);
+
+            return;
+        }
+
+        parent::deleteEntity($entityManager, $entityInstance);
     }
 }

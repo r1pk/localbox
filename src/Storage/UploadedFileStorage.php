@@ -5,13 +5,16 @@ namespace App\Storage;
 use App\Entity\File;
 use App\Exception\FileStorageAccessException;
 use App\Service\UploadDirectoryPathResolver;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Throwable;
 
 class UploadedFileStorage
 {
     public function __construct(
         protected UploadDirectoryPathResolver $uploadDirectoryPathResolver,
+        protected Filesystem $filesystem,
     ) {}
 
     /**
@@ -27,6 +30,27 @@ class UploadedFileStorage
         } catch (FileException $exception) {
             throw new FileStorageAccessException(
                 'Unable to move the uploaded file to the target destination', previous: $exception,
+            );
+        }
+    }
+
+    /**
+     * @throws FileStorageAccessException
+     */
+    public function remove(File $file): void
+    {
+        try {
+            $path = implode(DIRECTORY_SEPARATOR, [
+                $this->uploadDirectoryPathResolver->resolve($file),
+                $file->getServerFilename()
+            ]);
+
+            if ($this->filesystem->exists($path) && is_file($path)) {
+                $this->filesystem->remove($path);
+            }
+        } catch (Throwable $exception) {
+            throw new FileStorageAccessException(
+                'Unable to remove file from storage', previous: $exception,
             );
         }
     }
