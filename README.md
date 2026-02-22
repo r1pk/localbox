@@ -66,9 +66,9 @@ Using docker is recommended for the fastest and most consistent setup.
    docker compose exec php bash /var/www/localbox/setup.sh
    ```
 
-Once the setup is complete, open `http://127.0.0.1` in your browser to start uploading and downloading files.
+Once the setup is complete, open `http://127.0.0.1:8000` in your browser to start uploading and downloading files.
 
-To manage uploaded files, open `http://127.0.0.1/admin` and sign in using the default administrator credentials:
+To manage uploaded files, open `http://127.0.0.1:8000/admin` and sign in using the default administrator credentials:
 
 - **Username:** `admin`
 - **Password:** `admin`
