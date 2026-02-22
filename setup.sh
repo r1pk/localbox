@@ -5,19 +5,19 @@ cd "$(dirname "$0")"
 
 echo "Starting project setup..."
 
-echo "1. Installing composer dependencies..."
+echo "- Installing composer dependencies..."
 composer install
 
-echo "2. Configuring the database..."
+echo "- Updating database schema..."
 php bin/console doctrine:schema:update --force
 
-echo "3. Building assets..."
+echo "- Building tailwind assets..."
 php bin/console tailwind:build
 
-echo "4. Clearing the cache..."
+echo "- Clearing application cache..."
 php bin/console cache:clear
 
-echo "5. Loading data fixtures..."
+echo "- Loading data fixtures..."
 php bin/console doctrine:fixtures:load --no-interaction
 
 echo "Project setup completed successfully!"

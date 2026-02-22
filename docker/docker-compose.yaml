@@ -16,7 +16,6 @@ services:
             context: .
             dockerfile: ./service/php/Dockerfile
         environment:
-            - APP_ENV=dev
             - DATABASE_URL=mysql://root@mysql:3306/localbox?serverVersion=9.5.0
         volumes:
             - "./config/php/default.ini:/usr/local/etc/php/conf.d/default.ini:ro"

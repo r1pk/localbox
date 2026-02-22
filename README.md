@@ -37,7 +37,7 @@ LocalBox requires the following components:
 
 The following components are recommended for a typical production setup.
 
-- `nginx` (or any compatible web server such as `apache`)
+- `Nginx` (or any compatible web server such as `Apache`)
 - `MySQL >= 9.5`
 
 ## Quick Start
@@ -84,37 +84,13 @@ Follow these steps to run the project without docker.
    cd localbox
    ```
 
-2. Install PHP dependencies:
+2. Run the setup script:
 
    ```bash
-   composer install
+   bash setup.sh
    ```
 
-3. Configure the database schema:
-
-   ```bash
-   php bin/console doctrine:schema:update --force
-   ```
-
-4. Build frontend assets (Tailwind via AssetMapper):
-
-   ```bash
-   php bin/console tailwind:build
-   ```
-
-5. Clear the cache:
-
-   ```bash
-   php bin/console cache:clear
-   ```
-
-6. Load data fixtures:
-
-   ```bash
-   php bin/console doctrine:fixtures:load --no-interaction
-   ```
-
-7. Start the local Symfony server:
+3. Start the local symfony server:
 
    ```bash
    symfony server:start
@@ -122,16 +98,49 @@ Follow these steps to run the project without docker.
 
    Alternatively, configure your web server (e.g., nginx or apache) to point to the `public/` directory.
 
-Once the setup is complete, open `http://127.0.0.1` in your browser to start uploading and downloading files.
+Once the setup is complete, open `http://127.0.0.1:8000` in your browser to start uploading and downloading files.
 
-To manage uploaded files, open `http://127.0.0.1/admin` and sign in using the default administrator credentials:
+To manage uploaded files, open `http://127.0.0.1:8000/admin` and sign in using the default administrator credentials:
 
 - **Username:** `admin`
 - **Password:** `admin`
 
+### Production Setup
+
+LocalBox runs in the `dev` environment by default.
+
+To enable production mode, set the `APP_ENV` variable to `prod` in your `.env` or `.env.local` file:
+
+```bash
+APP_ENV=prod
+```
+
+When running in the `prod` environment, assets must be manually compiled.
+
+#### Compile Assets (Docker Setup)
+
+When using docker, run the command inside the PHP container from the project root:
+
+```bash
+cd localbox/docker
+docker compose exec php bash -c "cd /var/www/localbox && php bin/console asset-map:compile"
+```
+
+This ensures that the command executes in the correct directory within the container, where all project files and configuration are available.
+
+#### Compile Assets (Manual Setup)
+
+For manual installations, run the following command in the project root:
+
+```bash
+php bin/console asset-map:compile
+```
+
+This generates optimized assets required in the production environment.
+
 ## Configuration
 
-LocalBox follows the standard Symfony environment configuration, using `.env` files for all settings.  
+LocalBox follows the standard symfony environment configuration, using `.env` files for all settings.  
 Most framework-related parameters retain their default values, so no additional changes are required for typical setup.
 
 ### Upload Storage Directory
