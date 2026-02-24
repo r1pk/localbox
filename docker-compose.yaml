@@ -20,8 +20,8 @@ services:
         environment:
             - DATABASE_URL=mysql://root@mysql:3306/localbox?serverVersion=9.5.0
         volumes:
+            # - "./docker/config/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro"
             - "./docker/config/php/default.ini:/usr/local/etc/php/conf.d/default.ini:ro"
-            - "./docker/config/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro"
             - "./:/var/www/localbox"
         depends_on:
             mysql:
