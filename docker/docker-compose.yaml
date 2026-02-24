@@ -2,6 +2,7 @@ name: "localbox"
 
 services:
     nginx:
+        container_name: 'nginx'
         image: nginx:alpine
         ports:
             - "8000:80"
@@ -12,6 +13,7 @@ services:
             - php
 
     php:
+        container_name: 'php'
         build:
             context: .
             dockerfile: ./service/php/Dockerfile
@@ -29,6 +31,7 @@ services:
             - host.docker.internal:host-gateway
 
     mysql:
+        container_name: 'mysql'
         image: mysql:9.5.0
         environment:
             - MYSQL_DATABASE=localbox
