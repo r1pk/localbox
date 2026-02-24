@@ -28,17 +28,10 @@
 
 LocalBox requires the following components:
 
-### Mandatory
-
 - `PHP >= 8.4`
 - `Composer >= 2.8`
-
-### Recommended
-
-The following components are recommended for a typical production setup.
-
-- `Nginx` (or any compatible web server such as `Apache`)
 - `MySQL >= 9.5`
+- `nginx` (or any compatible web server such as `Apache`)
 
 ## Quick Start
 
@@ -51,7 +44,7 @@ Using docker is recommended for the fastest and most consistent setup.
 
    ```bash
    git clone https://github.com/r1pk/localbox.git
-   cd localbox/docker
+   cd localbox
    ```
 
 2. Start the docker environment:
@@ -63,7 +56,7 @@ Using docker is recommended for the fastest and most consistent setup.
 3. Run the setup script inside the PHP container:
 
    ```bash
-   docker compose exec php bash /var/www/localbox/setup.sh
+   docker compose exec php bash -c "bash /var/www/localbox/setup.sh"
    ```
 
 Once the setup is complete, open `http://127.0.0.1:8000` in your browser to start uploading and downloading files.
@@ -122,11 +115,10 @@ When running in the `prod` environment, assets must be manually compiled.
 When using docker, run the command inside the PHP container from the project root:
 
 ```bash
-cd localbox/docker
-docker compose exec php bash -c "cd /var/www/localbox && php bin/console asset-map:compile"
+docker compose exec php bash -c "php /var/www/localbox/bin/console asset-map:compile"
 ```
 
-This ensures that the command executes in the correct directory within the container, where all project files and configuration are available.
+This compiles and optimizes assets within the container, ensuring that the production environment has all required static files available.
 
 #### Compile Assets (Manual Setup)
 
@@ -136,7 +128,7 @@ For manual installations, run the following command in the project root:
 php bin/console asset-map:compile
 ```
 
-This generates optimized assets required in the production environment.
+This command builds and optimizes assets locally, preparing the application for production use.
 
 ## Configuration
 

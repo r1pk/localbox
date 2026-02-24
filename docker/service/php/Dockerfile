@@ -7,3 +7,7 @@ COPY --from=composer:2.8.12 /usr/bin/composer /usr/local/bin/composer
 RUN apt-get update \
     && apt-get install -y bash curl git unzip zip \
     && install-php-extensions gd intl opcache pdo pdo_mysql xdebug
+
+RUN mkdir -p /var/www/storage \
+    && chown -R www-data:www-data /var/www/storage \
+    && chmod 775 /var/www/storage
