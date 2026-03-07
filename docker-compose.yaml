@@ -35,8 +35,6 @@ services:
         environment:
             - MYSQL_DATABASE=localbox
             - MYSQL_ALLOW_EMPTY_PASSWORD=true
-        ports:
-            - "3306:3306"
         healthcheck:
             test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
             timeout: 5s
