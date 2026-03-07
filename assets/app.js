@@ -1,2 +1,5 @@
+import { startStimulusApp } from '@symfony/stimulus-bundle';
+
 import './styles/app.css';
-import './bootstrap.js';
+
+const app = startStimulusApp();
