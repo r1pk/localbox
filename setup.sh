@@ -17,7 +17,7 @@ php bin/console tailwind:build
 echo "- Clearing application cache..."
 php bin/console cache:clear
 
-echo "- Loading data fixtures..."
-php bin/console doctrine:fixtures:load --no-interaction
+echo "- Creating default admin user..."
+php bin/console app:create_admin
 
 echo "Project setup completed successfully!"
