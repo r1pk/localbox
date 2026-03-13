@@ -14,10 +14,13 @@ php bin/console doctrine:schema:update --force
 echo "- Building tailwind assets..."
 php bin/console tailwind:build
 
-echo "- Clearing application cache..."
-php bin/console cache:clear
+echo "- Compiling the asset map..."
+php bin/console asset-map:compile
 
 echo "- Creating default admin user..."
 php bin/console app:create_admin
+
+echo "- Clearing application cache..."
+php bin/console cache:clear
 
 echo "Project setup completed successfully!"
