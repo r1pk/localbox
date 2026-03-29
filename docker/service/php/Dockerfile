@@ -11,3 +11,5 @@ RUN apt-get update \
 RUN mkdir -p /var/www/storage \
     && chown -R www-data:www-data /var/www/storage \
     && chmod 775 /var/www/storage
+
+WORKDIR /var/www/localbox
