@@ -41,6 +41,10 @@ class FileCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
+        $action = Action::new('download', 'Download', 'fa fa-download');
+        $action->linkToRoute('app_file_download', fn (File $file): array => ['token' => $file->getToken()]);
+
+        $actions->add(Crud::PAGE_INDEX, $action);
         $actions->disable(Action::EDIT);
         $actions->disable(Action::NEW);
 
