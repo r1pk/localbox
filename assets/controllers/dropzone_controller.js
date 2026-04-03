@@ -6,13 +6,15 @@ import '../styles/dropzone_controller.css';
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
     static targets = [
-        'uploadForm',
-        'clickableButton',
-        'previewContainer'
+        'uploadFormContainer',
+        'uploadSelectButton',
+        'uploadPreviewContainer',
+        'uploadPreviewFileCountLabel',
+        'uploadPreviewList'
     ];
 
     static values = {
-        previewTemplate: String
+        previewListItemTemplate: String
     };
 
     initialize() {
@@ -21,16 +23,16 @@ export default class extends Controller {
     }
 
     connect() {
-        this.instance = new Dropzone(this.uploadFormTarget, {
+        this.instance = new Dropzone(this.uploadFormContainerTarget, {
             chunking: true,
             chunkSize: 16000000, // 16 MB
 
             maxFilesize: 32000, // 32 GB
 
-            clickable: this.clickableButtonTarget,
+            clickable: this.uploadSelectButtonTarget,
 
-            previewsContainer: this.previewContainerTarget,
-            previewTemplate: this.previewTemplateValue
+            previewsContainer: this.uploadPreviewListTarget,
+            previewTemplate: this.previewListItemTemplateValue
         });
 
         this.instance.on('addedfile', this._handleAddedFile);
@@ -38,16 +40,18 @@ export default class extends Controller {
     }
 
     handleAddedFile() {
-        this.instance.element.addEventListener('transitionend', async () => {
+        this.updateFileCountLabel();
+
+        this.instance.element.addEventListener('transitionend', () => {
             this.instance.element.classList.add('hidden');
 
-            this.instance.previewsContainer.classList.remove('hidden');
+            this.uploadPreviewContainerTarget.classList.remove('hidden');
             setTimeout(() => {
-                this.instance.previewsContainer.classList.remove('opacity-0', 'scale-0');
+                this.uploadPreviewContainerTarget.classList.remove('opacity-0');
             });
         }, { once: true });
 
-        this.instance.element.classList.add('opacity-0', 'scale-0');
+        this.instance.element.classList.add('opacity-0');
     }
 
     handleQueueComplete() {
@@ -58,6 +62,12 @@ export default class extends Controller {
         }
 
         window.location.href = response.url;
+    }
+
+    updateFileCountLabel() {
+        const count = Array.isArray(this.instance.files) ? this.instance.files.length : 0;
+
+        this.uploadPreviewFileCountLabelTarget.innerText = `Files: ${count}`;
     }
 
     getLastAcceptedFileResponse() {

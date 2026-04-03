@@ -1,0 +1,20 @@
+<footer class="flex flex-col gap-2 px-4 py-8 md:flex-row md:justify-between md:px-8">
+    <dl class="flex justify-between gap-2 md:flex-col md:items-start">
+        <dt class="font-bold font-inter text-xs text-zinc-300 uppercase tracking-widest">
+            uploaded files
+        </dt>
+        <dd class="font-inter font-medium text-brand text-xs">{{ summary.total_count|default(0) }}</dd>
+    </dl>
+    <dl class="flex justify-between gap-2 md:flex-col md:items-center">
+        <dt class="font-bold font-inter text-xs text-zinc-300 uppercase tracking-widest">
+            storage used
+        </dt>
+        <dd class="font-inter font-medium text-brand text-xs">{{ summary.total_size|default(0)|format_file_size }}</dd>
+    </dl>
+    <dl class="flex justify-between gap-2 md:flex-col md:items-end">
+        <dt class="font-bold font-inter text-xs text-zinc-300 uppercase tracking-widest">
+            uploads today
+        </dt>
+        <dd class="font-inter font-medium text-brand text-xs">{{ summary.today_count|default(0) }}</dd>
+    </dl>
+</footer>

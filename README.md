@@ -22,7 +22,7 @@
 
 ## Preview
 
-![LocalBox Preview GIF](https://i.imgur.com/oHalGCZ.gif)
+![LocalBox Preview GIF](https://i.imgur.com/0A1XdZd.gif)
 
 ## Requirements
 

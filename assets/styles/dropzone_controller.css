@@ -1,13 +1,17 @@
+/* drag file effect */
 [data-controller='dropzone'] .dz-drag-hover {
-    border-color: #007a55;
-    transform: translateY(-0.75rem);
-    box-shadow: 0 25px 50px -12px rgb(0 122 85 / 0.25);
+    background-color: oklch(from var(--color-brand) l c h / 0.25);
 }
 
+[data-controller='dropzone'] .dz-drag-hover div {
+    border-color: oklch(from var(--color-brand) l c h / 0.5);
+}
+
+/* successful file upload */
 [data-controller='dropzone'] .dz-success.dz-complete {
-    border-color: #007a55;
+    border-color: oklch(from var(--color-brand) l c h / 0.5);
 }
 
 [data-controller='dropzone'] .dz-success.dz-complete [data-dz-uploadprogress] {
-    background-color: #009966;
+    background-color: oklch(from var(--color-brand) l c h / 0.25);
 }

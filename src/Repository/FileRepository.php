@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\File;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -24,5 +25,19 @@ class FileRepository extends ServiceEntityRepository
     public function findByGroupToken(string $token): array
     {
         return $this->findBy(['groupToken' => $token]);
+    }
+
+    public function getSummary(): array
+    {
+        $builder = $this->createQueryBuilder('f');
+
+        $builder->select([
+            'count(f.id) as total_count',
+            'sum(f.size) as total_size',
+            'sum(case when f.createdAt >= :today then 1 else 0 end) as today_count',
+        ]);
+        $builder->setParameter('today', new DateTime('today'));
+
+        return $builder->getQuery()->getSingleResult();
     }
 }

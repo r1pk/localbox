@@ -6,6 +6,10 @@ class FileSizeFormatter
 {
     public function format(int $bytes): string
     {
+        if ($bytes === 0) {
+            return 'N/A';
+        }
+
         $i = floor(log($bytes) / log(1024));
         $units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 

@@ -36,7 +36,7 @@ class DashboardController extends AbstractDashboardController
     {
         $assets = parent::configureAssets();
 
-        $assets->addAssetMapperEntry('admin');
+        $assets->addAssetMapperEntry('bootstrap');
 
         return $assets;
     }
