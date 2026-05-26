@@ -20,13 +20,13 @@
                                 <img src="{{ asset('/images/thumbnail-placeholder.svg') }}" alt="file thumbnail" class="size-full object-cover" />
                             </figure>
                             <article class="flex flex-col">
-                                <p class="truncate font-medium font-mono-space text-sm text-zinc-300">
+                                <p class="truncate font-medium font-space-mono text-sm text-zinc-300">
                                     {{ file.getClientFilename() }}
                                 </p>
                                 <div class="flex items-center gap-2">
-                                    <span class="font-mono-space text-xs text-zinc-400">{{ file.getSize()|format_file_size }}</span>
+                                    <span class="font-space-mono text-xs text-zinc-400">{{ file.getSize()|format_file_size }}</span>
                                     <hr class="h-px w-2 border-zinc-700" />
-                                    <time datetime="{{ file.getCreatedAt()|date('c') }}" class="font-mono-space text-xs text-zinc-400">
+                                    <time datetime="{{ file.getCreatedAt()|date('c') }}" class="font-space-mono text-xs text-zinc-400">
                                         {{ file.getCreatedAt()|date('j M. Y') }}
                                     </time>
                                 </div>

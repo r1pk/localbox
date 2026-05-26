@@ -21,7 +21,7 @@
                             <p class="font-bold font-inter text-red-400 text-xs uppercase tracking-widest">
                                 authentication error
                             </p>
-                            <p class="font-mono-space text-red-300 text-sm">
+                            <p class="font-space-mono text-red-300 text-sm">
                                 {{ error.messageKey|trans(error.messageData, 'security') }}
                             </p>
                         </div>
@@ -31,7 +31,7 @@
                             <p class="font-bold font-inter text-emerald-400 text-xs uppercase tracking-widest">
                                 authenticated
                             </p>
-                            <p class="font-mono-space text-emerald-300 text-sm">
+                            <p class="font-space-mono text-emerald-300 text-sm">
                                 you are logged in as {{ app.user.userIdentifier }}
                             </p>
                         </div>
@@ -41,13 +41,13 @@
                             <label for="username" class="font-bold font-inter text-xs text-zinc-300 uppercase tracking-widest">
                                 username
                             </label>
-                            <input type="text" name="_username" id="username" autocomplete="username" value="{{ last_username }}" class="border border-zinc-800 bg-zinc-950/25 p-4 font-mono-space text-sm text-zinc-300 outline-none transition-colors focus:border-brand focus:bg-zinc-950/50" required autofocus />
+                            <input type="text" name="_username" id="username" autocomplete="username" value="{{ last_username }}" class="border border-zinc-800 bg-zinc-950/25 p-4 font-space-mono text-sm text-zinc-300 outline-none transition-colors focus:border-brand focus:bg-zinc-950/50" required autofocus />
                         </div>
                         <div class="flex flex-col gap-2">
                             <label for="password" class="font-bold font-inter text-xs text-zinc-300 uppercase tracking-widest">
                                 password
                             </label>
-                            <input type="password" name="_password" id="password" autocomplete="current-password" class="border border-zinc-800 bg-zinc-950/25 p-4 font-mono-space text-sm text-zinc-300 outline-none transition-colors focus:border-brand focus:bg-zinc-950/50" required />
+                            <input type="password" name="_password" id="password" autocomplete="current-password" class="border border-zinc-800 bg-zinc-950/25 p-4 font-space-mono text-sm text-zinc-300 outline-none transition-colors focus:border-brand focus:bg-zinc-950/50" required />
                         </div>
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" data-controller="csrf-protection" />
                         <button type="submit" class="cursor-pointer bg-brand px-12 py-4 font-bold font-inter text-xs text-zinc-950 uppercase tracking-widest transition-transform hover:brightness-125">
