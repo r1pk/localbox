@@ -3,10 +3,10 @@
 {% block main %}
     <section class="flex min-h-dvh flex-col items-center justify-center">
         {{ include('partials/header.html.twig') }}
-        <div class="flex w-full max-w-2xl flex-col border border-zinc-800 border-solid bg-zinc-900">
+        <div class="flex w-full max-w-2xl flex-col border border-solid border-zinc-800 bg-zinc-900">
             <section class="flex flex-col">
                 <header class="flex items-center justify-between px-4 py-8 md:px-8">
-                    <h2 class="font-bold font-inter text-brand text-xs uppercase tracking-widest">
+                    <h2 class="font-inter text-xs font-bold tracking-widest text-brand uppercase">
                         available files
                     </h2>
                     <span class="bg-zinc-950/25 px-4 py-2 font-space-mono text-xs text-zinc-300 uppercase">
@@ -20,7 +20,7 @@
                                 <img src="{{ asset('/images/thumbnail-placeholder.svg') }}" alt="file thumbnail" class="size-full object-cover" />
                             </figure>
                             <article class="flex flex-col">
-                                <p class="truncate font-medium font-space-mono text-sm text-zinc-300">
+                                <p class="truncate font-space-mono text-sm font-medium text-zinc-300">
                                     {{ file.getClientFilename() }}
                                 </p>
                                 <div class="flex items-center gap-2">
@@ -33,7 +33,7 @@
                             </article>
                             <div class="ml-auto">
                                 <a href="{{ path('app_file_download', { 'token': file.getToken() }) }}" class="inline-flex bg-brand p-2 text-zinc-950 transition-transform hover:brightness-125">
-                                    <span class="hidden font-bold font-inter text-xs text-zinc-950 uppercase tracking-widest md:inline">
+                                    <span class="hidden font-inter text-xs font-bold tracking-widest text-zinc-950 uppercase md:inline">
                                         download
                                     </span>
                                     <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="inline md:hidden">
