@@ -2,12 +2,10 @@
 
 namespace App\Controller\File;
 
-use App\Exception\ApplicationException;
 use App\Exception\FileAvailabilityException;
 use App\Repository\FileRepository;
 use App\Service\Response\BinaryFileResponseFactory;
 use App\Service\Upload\UploadCoordinator;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,46 +17,28 @@ final class FileController extends AbstractController
     #[Route('/upload', name: 'app_file_upload')]
     public function upload(Request $request, UploadCoordinator $coordinator): Response
     {
-        try {
-            $result = $coordinator->upload($request);
+        $result = $coordinator->upload($request);
 
-            if ($result->isComplete()) {
-                $url = $this->generateUrl('app_file_group_show', [
-                    'token' => $result->getGroupToken()
-                ]);
+        if ($result->isComplete()) {
+            $url = $this->generateUrl('app_file_group_show', [
+                'token' => $result->getGroupToken()
+            ]);
 
-                return $this->json(['url' => $url], Response::HTTP_CREATED);
-            }
-
-            return $this->json([]);
-        } catch (ApplicationException $exception) {
-            return $this->json($exception->getResponsePayload(), $exception->getResponseStatus());
-        } catch (Exception) {
-            return $this->json(
-                ['error' => 'An unexpected server error occurred'],
-                Response::HTTP_INTERNAL_SERVER_ERROR,
-            );
+            return $this->json(['url' => $url], Response::HTTP_CREATED);
         }
+
+        return $this->json([]);
     }
 
     #[Route('/{token}/download', name: 'app_file_download')]
     public function download(BinaryFileResponseFactory $factory, FileRepository $repository, string $token): Response
     {
-        try {
-            $file = $repository->findByToken($token);
+        $file = $repository->findByToken($token);
 
-            if ($file === null) {
-                throw new FileAvailabilityException('File does not exist');
-            }
-
-            return $factory->fromFile($file);
-        } catch (ApplicationException $exception) {
-            return $this->json($exception->getResponsePayload(), $exception->getResponseStatus());
-        } catch (Exception) {
-            return $this->json(
-                ['error' => 'An unexpected server error occurred'],
-                Response::HTTP_INTERNAL_SERVER_ERROR,
-            );
+        if ($file === null) {
+            throw new FileAvailabilityException('File does not exist');
         }
+
+        return $factory->fromFile($file);
     }
 }
