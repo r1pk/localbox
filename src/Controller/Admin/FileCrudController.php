@@ -4,8 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\File;
 use App\Exception\FileStorageAccessException;
-use App\Service\FileDeleter;
-use App\Service\FileSizeFormatter;
+use App\Service\File\FileDeleter;
+use App\Service\File\FileSizeFormatter;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;

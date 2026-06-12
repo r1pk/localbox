@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Upload;
 
 use App\Exception\FileAvailabilityException;
 use App\Exception\FileChunkIntegrityException;
 use App\Exception\FileStorageAccessException;
 use App\Model\ChunkedUploadRequest;
+use App\Service\Path\TemporaryDirectoryPathResolver;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;

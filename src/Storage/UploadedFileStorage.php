@@ -4,7 +4,7 @@ namespace App\Storage;
 
 use App\Entity\File;
 use App\Exception\FileStorageAccessException;
-use App\Service\UploadDirectoryPathResolver;
+use App\Service\Path\UploadDirectoryPathResolver;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

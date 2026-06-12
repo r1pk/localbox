@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\File;
 
 use App\Entity\File;
 use App\Exception\FileStorageAccessException;

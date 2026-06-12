@@ -7,7 +7,7 @@ namespace App\Command;
 use App\Entity\User;
 use App\Enum\UserRole;
 use App\Repository\UserRepository;
-use App\Service\UserPasswordHasher;
+use App\Service\User\UserPasswordHasher;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;

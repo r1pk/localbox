@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Upload;
 
 use App\Entity\File;
 use App\Exception\FileStorageAccessException;
+use App\Service\Token\TokenGenerator;
 use App\Storage\UploadedFileStorage;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

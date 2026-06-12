@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Upload;
 
 use App\Exception\FileAvailabilityException;
 use App\Exception\FileChunkIntegrityException;
 use App\Exception\FileStorageAccessException;
 use App\Exception\UploadTokenValidationException;
 use App\Model\FileUploadResult;
+use App\Service\Token\GroupTokenIssuer;
 use Symfony\Component\HttpFoundation\Request;
 
-class FileUploadCoordinator
+class UploadCoordinator
 {
     public function __construct(
         protected UploadedFileResolver $uploadedFileResolver,

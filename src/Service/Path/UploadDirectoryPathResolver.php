@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Path;
 
 use App\Entity\File;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;

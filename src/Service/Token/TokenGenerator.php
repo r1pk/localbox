@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Token;
 
 use Symfony\Component\Uid\Uuid;
 

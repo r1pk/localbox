@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\FileRepository;
-use App\Service\GroupTokenIssuer;
+use App\Service\Token\GroupTokenIssuer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;

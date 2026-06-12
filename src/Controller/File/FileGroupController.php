@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\File;
 
 use App\Repository\FileRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

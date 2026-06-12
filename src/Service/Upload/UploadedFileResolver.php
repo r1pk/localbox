@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Upload;
 
 use App\Exception\FileAvailabilityException;
 use App\Exception\FileChunkIntegrityException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Path;
 
 class TemporaryDirectoryPathResolver
 {

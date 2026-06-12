@@ -2,7 +2,7 @@
 
 namespace App\Twig\Extension;
 
-use App\Service\FileSizeFormatter;
+use App\Service\File\FileSizeFormatter;
 use Twig\Attribute\AsTwigFilter;
 
 class FileSizeExtension

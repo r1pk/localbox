@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Response;
 
 use App\Entity\File;
 use App\Exception\FileAvailabilityException;
+use App\Service\Path\UploadDirectoryPathResolver;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
@@ -16,7 +17,7 @@ class BinaryFileResponseFactory
     /**
      * @throws FileAvailabilityException
      */
-    public function create(File $file): BinaryFileResponse
+    public function fromFile(File $file): BinaryFileResponse
     {
         $filename = $file->getClientFilename();
         $path = implode(DIRECTORY_SEPARATOR, [
@@ -24,6 +25,14 @@ class BinaryFileResponseFactory
             $file->getServerFilename()
         ]);
 
+        return $this->fromPath($path, $filename);
+    }
+
+    /**
+     * @throws FileAvailabilityException
+     */
+    public function fromPath(string $path, string $filename): BinaryFileResponse
+    {
         if (!file_exists($path)) {
             throw new FileAvailabilityException('File does not exist');
         }
