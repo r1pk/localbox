@@ -3,8 +3,9 @@
 ###< miscellaneous ###
 
 ###> environment variables ###
-.env.*.local
-.env.local
+.env
+.env.*
+!.env.default
 ###< environment variables ###
 
 ###> symfony/framework-bundle ###

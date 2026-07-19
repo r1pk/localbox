@@ -5,6 +5,11 @@ cd "$(dirname "$0")"
 
 echo "Starting project setup..."
 
+if [ ! -f .env ]; then
+    echo "- Creating local environment file from .env.default..."
+    cp .env.default .env
+fi
+
 echo "- Installing composer dependencies..."
 composer install
 
