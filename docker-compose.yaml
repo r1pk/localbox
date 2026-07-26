@@ -2,39 +2,39 @@ name: "localbox"
 
 services:
     nginx:
-        container_name: 'localbox-nginx'
+        container_name: localbox-nginx
         image: nginx:alpine
         ports:
             - "${DOCKER_HOST_PORT:-8000}:80"
         volumes:
-            - "./docker/config/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro"
+            - "./docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro"
             - "./:/var/www/localbox"
         depends_on:
             - php
 
     php:
-        container_name: 'localbox-php'
+        container_name: localbox-php
         build:
             context: .
-            dockerfile: ./docker/service/php/Dockerfile
+            dockerfile: ./docker/php/Dockerfile
         environment:
-            - DATABASE_URL=mysql://root@mysql:3306/localbox?serverVersion=9.5.0
+            - "DATABASE_URL=mysql://root@mysql:3306/localbox?serverVersion=9.5"
         volumes:
-            - "./docker/config/php/default.ini:/usr/local/etc/php/conf.d/default.ini:ro"
+            - "./docker/php/conf.d/default.ini:/usr/local/etc/php/conf.d/default.ini:ro"
             - "./storage:/var/www/storage"
             - "./:/var/www/localbox"
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
         depends_on:
             mysql:
                 condition: service_healthy
-        extra_hosts:
-            - host.docker.internal:host-gateway
 
     mysql:
-        container_name: 'localbox-mysql'
-        image: mysql:9.5.0
+        container_name: localbox-mysql
+        image: mysql:9.5
         environment:
-            - MYSQL_DATABASE=localbox
-            - MYSQL_ALLOW_EMPTY_PASSWORD=true
+            - "MYSQL_DATABASE=localbox"
+            - "MYSQL_ALLOW_EMPTY_PASSWORD=true"
         healthcheck:
             test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
             timeout: 5s
@@ -42,4 +42,4 @@ services:
 
 networks:
     default:
-        name: "localbox-network"
+        name: localbox-network
