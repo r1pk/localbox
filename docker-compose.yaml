@@ -1,8 +1,7 @@
-name: "localbox"
+name: localbox
 
 services:
     nginx:
-        container_name: localbox-nginx
         image: nginx:alpine
         ports:
             - "${DOCKER_HOST_PORT:-8000}:80"
@@ -13,7 +12,6 @@ services:
             - php
 
     php:
-        container_name: localbox-php
         build:
             context: .
             dockerfile: ./docker/php/Dockerfile
@@ -30,7 +28,6 @@ services:
                 condition: service_healthy
 
     mysql:
-        container_name: localbox-mysql
         image: mysql:9.5
         environment:
             - "MYSQL_DATABASE=localbox"
@@ -39,7 +36,3 @@ services:
             test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
             timeout: 5s
             retries: 10
-
-networks:
-    default:
-        name: localbox-network
