@@ -1,0 +1,20 @@
+###> miscellaneous ###
+/.idea/
+###< miscellaneous ###
+
+###> environment variables ###
+.env
+.env.*
+!.env.default
+###< environment variables ###
+
+###> symfony/framework-bundle ###
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/asset-mapper ###
+/assets/vendor/
+/public/assets/
+###< symfony/asset-mapper ###

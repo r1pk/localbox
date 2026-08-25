@@ -1,0 +1,38 @@
+@import 'tailwindcss';
+
+@font-face {
+    font-family: 'Inter';
+    src: url('./fonts/Inter.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Space Mono';
+    src: url('./fonts/SpaceMono-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@theme {
+    --font-inter: 'Inter', sans-serif;
+    --font-space-mono: 'Space Mono', monospace;
+
+    --color-brand: oklch(69.6% 0.17 162.48);
+    --color-on-brand: oklch(0.18 0 0);
+}
+
+*::selection {
+    color: var(--color-on-brand);
+    background: var(--color-brand);
+}
+
+.bg-radial-gradient-pattern {
+    background: radial-gradient(
+        125% 125% at 50% 75%,
+        oklch(14.1% 0.005 285.823) 25%,
+        oklch(from var(--color-brand) l c h / 0.25) 100%
+    );
+}

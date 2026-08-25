@@ -1,0 +1,17 @@
+/* drag file effect */
+[data-controller='dropzone'] .dz-drag-hover {
+    background-color: oklch(from var(--color-brand) l c h / 0.25);
+}
+
+[data-controller='dropzone'] .dz-drag-hover div {
+    border-color: oklch(from var(--color-brand) l c h / 0.5);
+}
+
+/* successful file upload */
+[data-controller='dropzone'] .dz-success.dz-complete {
+    border-color: oklch(from var(--color-brand) l c h / 0.5);
+}
+
+[data-controller='dropzone'] .dz-success.dz-complete [data-dz-uploadprogress] {
+    background-color: oklch(from var(--color-brand) l c h / 0.25);
+}

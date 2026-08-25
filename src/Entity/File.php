@@ -1,0 +1,98 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\FileRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+
+#[ORM\Entity(repositoryClass: FileRepository::class)]
+class File
+{
+    use TimestampableEntity;
+
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 32)]
+    private ?string $token = null;
+
+    #[ORM\Column(length: 32)]
+    private ?string $groupToken = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $clientFilename = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $serverFilename = null;
+
+    #[ORM\Column(type: 'bigint')]
+    private ?int $size = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token): static
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function getGroupToken(): ?string
+    {
+        return $this->groupToken;
+    }
+
+    public function setGroupToken(string $groupToken): static
+    {
+        $this->groupToken = $groupToken;
+
+        return $this;
+    }
+
+    public function getClientFilename(): ?string
+    {
+        return $this->clientFilename;
+    }
+
+    public function setClientFilename(string $clientFilename): static
+    {
+        $this->clientFilename = $clientFilename;
+
+        return $this;
+    }
+
+    public function getServerFilename(): ?string
+    {
+        return $this->serverFilename;
+    }
+
+    public function setServerFilename(string $serverFilename): static
+    {
+        $this->serverFilename = $serverFilename;
+
+        return $this;
+    }
+
+    public function getSize(): ?int
+    {
+        return $this->size;
+    }
+
+    public function setSize(int $size): static
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+}
