@@ -15,7 +15,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-/** @extends AbstractCrudController<File> */
+/**
+ * @extends AbstractCrudController<File>
+ */
 class FileCrudController extends AbstractCrudController
 {
     public function __construct(

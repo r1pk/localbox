@@ -9,7 +9,9 @@ abstract class ApplicationException extends Exception
 {
     public const int RESPONSE_STATUS = Response::HTTP_INTERNAL_SERVER_ERROR;
 
-    /** @return array<string, string> */
+    /**
+     * @return array<string, string>
+     */
     public function getResponsePayload(): array
     {
         return [

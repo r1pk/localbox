@@ -7,7 +7,11 @@ $finder = $finder->append([__FILE__]);
 $config = new PhpCsFixer\Config();
 $config = $config->setRules([
     '@Symfony' => true,
+
     'braces_position' => false,
+    'single_line_empty_body' => true,
+    'single_line_throw' => false,
+
     'class_attributes_separation' => [
         'elements' => [
             'case' => 'one',
@@ -16,26 +20,32 @@ $config = $config->setRules([
             'property' => 'one',
         ],
     ],
+    'method_argument_space' => [
+        'on_multiline' => 'ensure_fully_multiline',
+    ],
+    'trailing_comma_in_multiline' => [
+        'elements' => ['arguments', 'array_destructuring', 'arrays', 'match', 'parameters'],
+    ],
+
     'concat_space' => [
         'spacing' => 'one',
     ],
     'declare_equal_normalize' => [
         'space' => 'single',
     ],
+    'yoda_style' => false,
+
     'global_namespace_import' => [
         'import_classes' => true,
         'import_constants' => false,
         'import_functions' => false,
     ],
-    'method_argument_space' => [
-        'on_multiline' => 'ensure_fully_multiline',
+    'phpdoc_line_span' => [
+        'const' => 'single',
+        'function' => 'multi',
+        'method' => 'multi',
+        'property' => 'single',
     ],
-    'single_line_empty_body' => true,
-    'single_line_throw' => false,
-    'trailing_comma_in_multiline' => [
-        'elements' => ['arguments', 'array_destructuring', 'arrays', 'parameters'],
-    ],
-    'yoda_style' => false,
 ]);
 $config->setIndent('    ');
 $config->setLineEnding(chr(10));

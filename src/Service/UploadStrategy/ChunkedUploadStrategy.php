@@ -20,7 +20,9 @@ class ChunkedUploadStrategy implements UploadStrategyInterface
         return $request instanceof ChunkedUploadRequest;
     }
 
-    /** @param ChunkedUploadRequest $request */
+    /**
+     * @param ChunkedUploadRequest $request
+     */
     public function extract(UploadRequestInterface $request): ?UploadedFile
     {
         return $this->uploadedFileBuilder->build($request);
