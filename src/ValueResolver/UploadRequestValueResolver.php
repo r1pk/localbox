@@ -6,6 +6,7 @@ use App\Exception\UnsupportedUploadRequestException;
 use App\Model\UploadRequest\ChunkedUploadRequest;
 use App\Model\UploadRequest\DirectUploadRequest;
 use App\Model\UploadRequest\UploadRequestInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
@@ -23,7 +24,9 @@ class UploadRequestValueResolver implements ValueResolverInterface
             return [];
         }
 
-        if (!$request->request->has('file')) {
+        $payload = $request->files->get('file');
+
+        if (!$payload instanceof UploadedFile) {
             throw new UnsupportedUploadRequestException('Unsupported upload request format');
         }
 
