@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Exception\InvalidUploadTokenException;
-use App\Exception\UnsupportedUploadRequestException;
+use App\Exception\MissingUploadStrategyException;
 use App\Model\FileUploadResult;
 use App\Model\UploadRequest\UploadRequestInterface;
 use App\Service\UploadStrategy\UploadStrategyResolver;
@@ -17,8 +17,8 @@ class UploadCoordinator
     ) {}
 
     /**
-     * @throws UnsupportedUploadRequestException
      * @throws InvalidUploadTokenException
+     * @throws MissingUploadStrategyException
      */
     public function upload(UploadRequestInterface $request): FileUploadResult
     {

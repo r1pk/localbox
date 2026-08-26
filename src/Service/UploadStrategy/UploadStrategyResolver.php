@@ -2,7 +2,7 @@
 
 namespace App\Service\UploadStrategy;
 
-use App\Exception\UnsupportedUploadRequestException;
+use App\Exception\MissingUploadStrategyException;
 use App\Model\UploadRequest\UploadRequestInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
@@ -15,7 +15,7 @@ class UploadStrategyResolver
     ) {}
 
     /**
-     * @throws UnsupportedUploadRequestException
+     * @throws MissingUploadStrategyException
      */
     public function resolve(UploadRequestInterface $request): UploadStrategyInterface
     {
@@ -25,6 +25,8 @@ class UploadStrategyResolver
             }
         }
 
-        throw new UnsupportedUploadRequestException('Unsupported upload request format');
+        throw new MissingUploadStrategyException(
+            'Unsupported upload request: ' . $request::class,
+        );
     }
 }
