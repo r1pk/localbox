@@ -76,7 +76,7 @@
         ],
         "cs": "php-cs-fixer fix --dry-run --diff",
         "cs:fix": "php-cs-fixer fix",
-        "phpstan": "phpstan analyse --memory-limit=1G",
+        "phpstan": "phpstan analyse --configuration=phpstan.dist.neon --memory-limit=1G",
         "qa": [
             "@cs",
             "@phpstan"
