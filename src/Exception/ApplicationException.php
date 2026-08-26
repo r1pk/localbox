@@ -7,8 +7,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class ApplicationException extends Exception
 {
-    const int RESPONSE_STATUS = Response::HTTP_INTERNAL_SERVER_ERROR;
+    public const int RESPONSE_STATUS = Response::HTTP_INTERNAL_SERVER_ERROR;
 
+    /**
+     * @return array<string, string>
+     */
     public function getResponsePayload(): array
     {
         return [

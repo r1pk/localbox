@@ -23,7 +23,8 @@ class ApplicationExceptionSubscriber implements EventSubscriberInterface
         if ($exception instanceof ApplicationException) {
             $event->setResponse(
                 new JsonResponse(
-                    $exception->getResponsePayload(), $exception->getResponseStatus(),
+                    $exception->getResponsePayload(),
+                    $exception->getResponseStatus(),
                 ),
             );
         }

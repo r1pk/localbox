@@ -19,9 +19,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand(name: 'app:create_admin', description: 'Hello PhpStorm')]
 class CreateAdminCommand extends Command
 {
-    const string DEFAULT_ADMIN_NAME = 'admin';
+    public const string DEFAULT_ADMIN_NAME = 'admin';
 
-    const string DEFAULT_ADMIN_PASSWORD = 'admin';
+    public const string DEFAULT_ADMIN_PASSWORD = 'admin';
 
     public function __construct(
         protected UserPasswordHasher $hasher,

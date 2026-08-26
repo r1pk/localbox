@@ -22,11 +22,17 @@ class FileRepository extends ServiceEntityRepository
         return $this->findOneBy(['token' => $token]);
     }
 
+    /**
+     * @return list<File>
+     */
     public function findByGroupToken(string $token): array
     {
         return $this->findBy(['groupToken' => $token]);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getSummary(): array
     {
         $builder = $this->createQueryBuilder('f');

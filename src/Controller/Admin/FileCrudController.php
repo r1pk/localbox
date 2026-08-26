@@ -15,6 +15,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
+/**
+ * @extends AbstractCrudController<File>
+ */
 class FileCrudController extends AbstractCrudController
 {
     public function __construct(
@@ -92,12 +95,6 @@ class FileCrudController extends AbstractCrudController
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        if ($entityInstance instanceof File) {
-            $this->deleter->delete($entityInstance);
-
-            return;
-        }
-
-        parent::deleteEntity($entityManager, $entityInstance);
+        $this->deleter->delete($entityInstance);
     }
 }

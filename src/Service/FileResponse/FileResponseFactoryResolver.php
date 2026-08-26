@@ -8,7 +8,9 @@ use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 class FileResponseFactoryResolver
 {
-    /** @param iterable<FileResponseFactoryInterface> $factories */
+    /**
+     * @param iterable<FileResponseFactoryInterface> $factories
+     */
     public function __construct(
         #[AutowireIterator(FileResponseFactoryInterface::class)]
         protected iterable $factories,

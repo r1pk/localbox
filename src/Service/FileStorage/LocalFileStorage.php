@@ -35,7 +35,8 @@ class LocalFileStorage implements FileStorageInterface
             );
         } catch (FileException $exception) {
             throw new FileStorageAccessException(
-                'Unable to move the uploaded file to the target destination', previous: $exception,
+                'Unable to move the uploaded file to the target destination',
+                previous: $exception,
             );
         }
     }
@@ -53,7 +54,8 @@ class LocalFileStorage implements FileStorageInterface
             }
         } catch (IOException $exception) {
             throw new FileStorageAccessException(
-                'Unable to remove the stored file from local storage', previous: $exception,
+                'Unable to remove the stored file from local storage',
+                previous: $exception,
             );
         }
     }

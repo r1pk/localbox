@@ -8,7 +8,9 @@ use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 class UploadStrategyResolver
 {
-    /** @param iterable<UploadStrategyInterface> $strategies */
+    /**
+     * @param iterable<UploadStrategyInterface> $strategies
+     */
     public function __construct(
         #[AutowireIterator(UploadStrategyInterface::class)]
         protected iterable $strategies,

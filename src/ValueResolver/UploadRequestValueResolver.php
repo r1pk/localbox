@@ -15,6 +15,7 @@ class UploadRequestValueResolver implements ValueResolverInterface
 {
     /**
      * @return iterable<UploadRequestInterface>
+     *
      * @throws UnsupportedUploadRequestException
      */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
@@ -45,7 +46,8 @@ class UploadRequestValueResolver implements ValueResolverInterface
 
         return [
             new DirectUploadRequest(
-                groupToken: $request->request->getString('group_token'), payload: $payload,
+                groupToken: $request->request->getString('group_token'),
+                payload: $payload,
             ),
         ];
     }

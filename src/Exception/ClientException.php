@@ -6,5 +6,5 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class ClientException extends ApplicationException
 {
-    const int RESPONSE_STATUS = Response::HTTP_BAD_REQUEST;
+    public const int RESPONSE_STATUS = Response::HTTP_BAD_REQUEST;
 }

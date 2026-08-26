@@ -22,7 +22,7 @@ final class FileController extends AbstractController
 
         if ($result->isComplete()) {
             $url = $this->generateUrl('app_file_group_show', [
-                'token' => $result->getGroupToken()
+                'token' => $result->getGroupToken(),
             ]);
 
             return $this->json(['url' => $url], Response::HTTP_CREATED);
