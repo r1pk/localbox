@@ -41,6 +41,7 @@ class GroupTokenIssuer
         $this->getSession()->set(self::SESSION_KEY, $tokens);
     }
 
+    /** @return list<string> */
     protected function getStoredTokens(): array
     {
         return $this->getSession()->get(self::SESSION_KEY, []);

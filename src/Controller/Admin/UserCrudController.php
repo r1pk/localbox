@@ -15,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
+/** @extends AbstractCrudController<User> */
 class UserCrudController extends AbstractCrudController
 {
     public function __construct(
@@ -74,19 +75,13 @@ class UserCrudController extends AbstractCrudController
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        if ($entityInstance instanceof User) {
-            $this->hasher->hash($entityInstance);
-        }
-
+        $this->hasher->hash($entityInstance);
         parent::persistEntity($entityManager, $entityInstance);
     }
 
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        if ($entityInstance instanceof User) {
-            $this->hasher->hash($entityInstance);
-        }
-
+        $this->hasher->hash($entityInstance);
         parent::updateEntity($entityManager, $entityInstance);
     }
 }

@@ -8,6 +8,7 @@ enum UserRole: string
 
     case User = 'ROLE_USER';
 
+    /** @return array<string, string> */
     public static function getChoices(): array
     {
         $choices = [];
