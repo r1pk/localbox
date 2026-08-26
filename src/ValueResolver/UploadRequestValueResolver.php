@@ -14,6 +14,7 @@ use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 class UploadRequestValueResolver implements ValueResolverInterface
 {
     /**
+     * @return iterable<UploadRequestInterface>
      * @throws UnsupportedUploadRequestException
      */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
