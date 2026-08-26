@@ -37,14 +37,14 @@ class UploadRequestValueResolver implements ValueResolverInterface
                     chunkIndex: $request->request->getInt('dzchunkindex'),
                     totalChunkCount: $request->request->getInt('dztotalchunkcount'),
                     groupToken: $request->request->getString('group_token'),
-                    payload: $request->files->get('file'),
+                    payload: $payload,
                 ),
             ];
         }
 
         return [
             new DirectUploadRequest(
-                groupToken: $request->request->getString('group_token'), payload: $request->files->get('file'),
+                groupToken: $request->request->getString('group_token'), payload: $payload,
             ),
         ];
     }
