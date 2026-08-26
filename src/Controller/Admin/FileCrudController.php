@@ -96,6 +96,5 @@ class FileCrudController extends AbstractCrudController
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         $this->deleter->delete($entityInstance);
-        parent::deleteEntity($entityManager, $entityInstance);
     }
 }
