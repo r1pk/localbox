@@ -3,8 +3,8 @@
 namespace App\Service\UploadStrategy;
 
 use App\Exception\UnsupportedUploadRequestException;
+use App\Model\UploadRequest\UploadRequestInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
-use Symfony\Component\HttpFoundation\Request;
 
 class UploadStrategyResolver
 {
@@ -17,7 +17,7 @@ class UploadStrategyResolver
     /**
      * @throws UnsupportedUploadRequestException
      */
-    public function resolve(Request $request): UploadStrategyInterface
+    public function resolve(UploadRequestInterface $request): UploadStrategyInterface
     {
         foreach ($this->strategies as $strategy) {
             if ($strategy->supports($request)) {

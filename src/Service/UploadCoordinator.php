@@ -5,8 +5,8 @@ namespace App\Service;
 use App\Exception\InvalidUploadTokenException;
 use App\Exception\UnsupportedUploadRequestException;
 use App\Model\FileUploadResult;
+use App\Model\UploadRequest\UploadRequestInterface;
 use App\Service\UploadStrategy\UploadStrategyResolver;
-use Symfony\Component\HttpFoundation\Request;
 
 class UploadCoordinator
 {
@@ -20,9 +20,9 @@ class UploadCoordinator
      * @throws UnsupportedUploadRequestException
      * @throws InvalidUploadTokenException
      */
-    public function upload(Request $request): FileUploadResult
+    public function upload(UploadRequestInterface $request): FileUploadResult
     {
-        $token = (string) $request->request->get('group_token', '');
+        $token = $request->getGroupToken();
 
         if (!$this->groupTokenIssuer->isValid($token)) {
             throw new InvalidUploadTokenException('Upload group token is invalid or has expired');

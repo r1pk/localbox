@@ -2,10 +2,11 @@
 
 namespace App\Service\UploadStrategy;
 
+use App\Model\UploadRequest\ChunkedUploadRequest;
+use App\Model\UploadRequest\UploadRequestInterface;
 use App\Service\UploadedFileBuilder;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\Request;
 
 #[AsTaggedItem(priority: 100)]
 class ChunkedUploadStrategy implements UploadStrategyInterface
@@ -14,12 +15,13 @@ class ChunkedUploadStrategy implements UploadStrategyInterface
         protected UploadedFileBuilder $uploadedFileBuilder,
     ) {}
 
-    public function supports(Request $request): bool
+    public function supports(UploadRequestInterface $request): bool
     {
-        return $request->request->has('dzuuid') && $request->files->has('file');
+        return $request instanceof ChunkedUploadRequest;
     }
 
-    public function extract(Request $request): ?UploadedFile
+    /** @param ChunkedUploadRequest $request */
+    public function extract(UploadRequestInterface $request): ?UploadedFile
     {
         return $this->uploadedFileBuilder->build($request);
     }
