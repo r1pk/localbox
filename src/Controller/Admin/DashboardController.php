@@ -53,7 +53,7 @@ class DashboardController extends AbstractDashboardController
         $crud = parent::configureCrud();
 
         $crud->overrideTemplates([
-            'layout' => 'admin/layout.html.twig'
+            'layout' => 'admin/layout.html.twig',
         ]);
 
         return $crud;

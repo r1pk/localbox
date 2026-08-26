@@ -54,7 +54,8 @@ class UploadedFileBuilder
             );
         } catch (FileException $exception) {
             throw new FileStorageAccessException(
-                'Unable to store the first chunk of a chunked upload', previous: $exception,
+                'Unable to store the first chunk of a chunked upload',
+                previous: $exception,
             );
         }
     }
@@ -71,7 +72,8 @@ class UploadedFileBuilder
             $this->filesystem->appendToFile($path, $content);
         } catch (IOException $exception) {
             throw new ChunkAssemblyFailedException(
-                'Unable to append a chunk to the assembly file', previous: $exception,
+                'Unable to append a chunk to the assembly file',
+                previous: $exception,
             );
         }
     }
@@ -88,7 +90,11 @@ class UploadedFileBuilder
         }
 
         return new UploadedFile(
-            $path, $chunk->getClientOriginalName(), mime_content_type($path) ?: null, null, true,
+            $path,
+            $chunk->getClientOriginalName(),
+            mime_content_type($path) ?: null,
+            null,
+            true,
         );
     }
 

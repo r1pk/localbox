@@ -17,10 +17,10 @@ $config = $config->setRules([
         ],
     ],
     'concat_space' => [
-        'spacing' => 'one'
+        'spacing' => 'one',
     ],
     'declare_equal_normalize' => [
-        'space' => 'single'
+        'space' => 'single',
     ],
     'global_namespace_import' => [
         'import_classes' => true,
@@ -28,7 +28,7 @@ $config = $config->setRules([
         'import_functions' => false,
     ],
     'method_argument_space' => [
-        'on_multiline' => 'ensure_fully_multiline'
+        'on_multiline' => 'ensure_fully_multiline',
     ],
     'single_line_empty_body' => true,
     'single_line_throw' => false,

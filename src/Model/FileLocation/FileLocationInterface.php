@@ -2,4 +2,6 @@
 
 namespace App\Model\FileLocation;
 
-interface FileLocationInterface extends \Stringable {}
+use Stringable;
+
+interface FileLocationInterface extends Stringable {}
