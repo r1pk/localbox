@@ -38,10 +38,7 @@ $config = $config->setRules([
     'yoda_style' => false,
 ]);
 $config->setIndent('    ');
-$config->setLineEnding(
-    "
-",
-);
+$config->setLineEnding(chr(10));
 $config->setFinder($finder);
 
 return $config;
