@@ -3,12 +3,12 @@
 namespace App\Controller;
 
 use App\Exception\FileNotFoundException;
+use App\Model\UploadRequest\UploadRequestInterface;
 use App\Repository\FileRepository;
 use App\Service\FileResponse\FileResponseFactoryResolver;
 use App\Service\FileStorage\FileStorageResolver;
 use App\Service\UploadCoordinator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class FileController extends AbstractController
 {
     #[Route('/upload', name: 'app_file_upload')]
-    public function upload(Request $request, UploadCoordinator $coordinator): Response
+    public function upload(UploadRequestInterface $request, UploadCoordinator $coordinator): Response
     {
         $result = $coordinator->upload($request);
 

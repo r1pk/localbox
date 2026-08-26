@@ -5,12 +5,11 @@ namespace App\Service;
 use App\Exception\ChunkAssemblyFailedException;
 use App\Exception\FileStorageAccessException;
 use App\Exception\MissingStoredFileException;
-use App\Model\ChunkedUploadRequest;
+use App\Model\UploadRequest\ChunkedUploadRequest;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\Request;
 
 class UploadedFileBuilder
 {
@@ -23,20 +22,18 @@ class UploadedFileBuilder
      * @throws ChunkAssemblyFailedException
      * @throws FileStorageAccessException
      */
-    public function build(Request $request): ?UploadedFile
+    public function build(ChunkedUploadRequest $request): ?UploadedFile
     {
-        $chunkedUploadRequest = new ChunkedUploadRequest($request);
+        $uuid = $request->getUuid();
+        $chunk = $request->getPayload();
 
-        $uuid = $chunkedUploadRequest->getUuid();
-        $chunk = $chunkedUploadRequest->getFile();
-
-        if ($chunkedUploadRequest->isFirstChunk()) {
+        if ($request->isFirstChunk()) {
             $this->initialize($chunk, $uuid);
         } else {
             $this->append($chunk, $uuid);
         }
 
-        if (!$chunkedUploadRequest->isLastChunk()) {
+        if (!$request->isLastChunk()) {
             return null;
         }
 

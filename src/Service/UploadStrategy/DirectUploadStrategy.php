@@ -2,20 +2,21 @@
 
 namespace App\Service\UploadStrategy;
 
+use App\Model\UploadRequest\DirectUploadRequest;
+use App\Model\UploadRequest\UploadRequestInterface;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\Request;
 
 #[AsTaggedItem(priority: 0)]
 class DirectUploadStrategy implements UploadStrategyInterface
 {
-    public function supports(Request $request): bool
+    public function supports(UploadRequestInterface $request): bool
     {
-        return $request->files->has('file');
+        return $request instanceof DirectUploadRequest;
     }
 
-    public function extract(Request $request): ?UploadedFile
+    public function extract(UploadRequestInterface $request): ?UploadedFile
     {
-        return $request->files->get('file');
+        return $request->getPayload();
     }
 }
