@@ -8,10 +8,8 @@ readonly class ChunkedUploadRequest implements UploadRequestInterface
 {
     public function __construct(
         protected string $uuid,
-
         protected int $chunkIndex,
         protected int $totalChunkCount,
-
         protected string $groupToken,
         protected UploadedFile $payload,
     ) {}
