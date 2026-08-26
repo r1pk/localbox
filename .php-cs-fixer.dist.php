@@ -47,8 +47,8 @@ $config = $config->setRules([
         'property' => 'single',
     ],
 ]);
-$config->setIndent('    ');
-$config->setLineEnding(chr(10));
-$config->setFinder($finder);
+$config = $config->setIndent('    ');
+$config = $config->setLineEnding(chr(10));
+$config = $config->setFinder($finder);
 
 return $config;
