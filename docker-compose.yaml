@@ -15,24 +15,10 @@ services:
         build:
             context: .
             dockerfile: ./docker/php/Dockerfile
-        environment:
-            - "DATABASE_URL=mysql://root@mysql:3306/localbox?serverVersion=9.5"
+        user: www-data
         volumes:
             - "./docker/php/conf.d/default.ini:/usr/local/etc/php/conf.d/default.ini:ro"
             - "./storage:/var/www/storage"
             - "./:/var/www/localbox"
         extra_hosts:
             - "host.docker.internal:host-gateway"
-        depends_on:
-            mysql:
-                condition: service_healthy
-
-    mysql:
-        image: mysql:9.5
-        environment:
-            - "MYSQL_DATABASE=localbox"
-            - "MYSQL_ALLOW_EMPTY_PASSWORD=true"
-        healthcheck:
-            test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-            timeout: 5s
-            retries: 10

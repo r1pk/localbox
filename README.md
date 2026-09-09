@@ -1,13 +1,13 @@
 <div align="center">
   <h1>LocalBox</h1>
   <p>
-    LocalBox is a lightweight file hosting solution for quick file sharing between devices on a local network. Built with <b>PHP 8</b>, <b>Symfony 8</b>, <b>Tailwind CSS 4</b>, and <b>MySQL</b>.
+    LocalBox is a lightweight file hosting solution for quick file sharing between devices on a local network. Built with <b>PHP 8</b>, <b>Symfony 8</b>, <b>Tailwind CSS 4</b>, and <b>SQLite</b>.
   </p>
   <p>
     <img alt="PHP 8" src="https://img.shields.io/badge/PHP-v8-777BB4?style=for-the-badge&logo=php">
     <img alt="Symfony 8" src="https://img.shields.io/badge/Symfony-v8-000000?style=for-the-badge&logo=symfony">
     <img alt="Tailwind CSS 4" src="https://img.shields.io/badge/Tailwind%20CSS-v4-06B6D4?style=for-the-badge&logo=tailwindcss">
-    <img alt="MySQL 9" src="https://img.shields.io/badge/MySQL-v9-4479A1?style=for-the-badge&logo=mysql">
+    <img alt="SQLite 3" src="https://img.shields.io/badge/SQLite-v3-003B57?style=for-the-badge&logo=sqlite">
     <img alt="Docker ready" src="https://img.shields.io/badge/Docker-ready-2496ED?style=for-the-badge&logo=docker">
     <img alt="License MIT" src="https://img.shields.io/badge/License-MIT-42b883?style=for-the-badge" >
   </p>
@@ -28,7 +28,7 @@
 
 - **PHP**: version 8.4 or higher
 - **Composer**: version 2.8 or higher
-- **MySQL**: version 9.5 or higher
+- **SQLite**: version 3 or higher (bundled with PHP via the `pdo_sqlite` extension)
 - **Web Server:** Nginx, Apache, or any other compatible web server
 - **Symfony CLI** (optional, for local development)
 - **Docker** (optional, for containerized setup)
