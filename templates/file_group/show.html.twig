@@ -3,19 +3,19 @@
 {% block main %}
     <section class="flex min-h-dvh flex-col items-center justify-center">
         {{ include('partials/header.html.twig') }}
-        <div class="flex w-full max-w-2xl flex-col border border-solid border-zinc-800 bg-zinc-900">
+        <div class="flex w-full max-w-2xl flex-col rounded-sm border border-solid border-zinc-800 bg-zinc-900">
             <section class="flex flex-col">
                 <header class="flex items-center justify-between px-4 py-8 md:px-8">
                     <h2 class="font-inter text-xs font-bold tracking-widest text-brand uppercase">
                         available files
                     </h2>
-                    <span class="bg-zinc-950/25 px-4 py-2 font-space-mono text-xs text-zinc-300 uppercase">
+                    <span class="rounded-sm bg-zinc-950/25 px-4 py-2 font-space-mono text-xs text-zinc-300 uppercase">
                         files: {{ files|length }}
                     </span>
                 </header>
                 <ul class="space-y-2 bg-zinc-950/25 px-4 py-4 md:px-8">
                     {% for file in files %}
-                        <li class="flex items-center gap-2 border border-zinc-900 bg-zinc-950/25 p-4 transition-colors hover:bg-zinc-950/50">
+                        <li class="flex items-center gap-2 rounded-sm border border-zinc-900 bg-zinc-950/25 p-4 transition-colors hover:bg-zinc-950/50">
                             <figure class="size-12">
                                 <img src="{{ asset('/images/thumbnail-placeholder.svg') }}" alt="file thumbnail" class="size-full object-cover" />
                             </figure>
@@ -32,7 +32,7 @@
                                 </div>
                             </article>
                             <div class="ml-auto">
-                                <a href="{{ path('app_file_download', { 'token': file.getToken() }) }}" class="inline-flex bg-brand p-2 text-zinc-950 transition-transform hover:brightness-125">
+                                <a href="{{ path('app_file_download', { 'token': file.getToken() }) }}" class="inline-flex rounded-sm bg-brand p-2 text-zinc-950 transition-transform hover:brightness-125">
                                     <span class="hidden font-inter text-xs font-bold tracking-widest text-zinc-950 uppercase md:inline">
                                         download
                                     </span>

@@ -29,10 +29,25 @@
     background: var(--color-brand);
 }
 
-.bg-radial-gradient-pattern {
-    background: radial-gradient(
-        125% 125% at 50% 75%,
-        oklch(14.1% 0.005 285.823) 25%,
-        oklch(from var(--color-brand) l c h / 0.25) 100%
-    );
+.bg-backdrop {
+    background: url(/images/noise-texture.png), oklch(14.1% 0.005 285.823);
+}
+
+.bg-backdrop::before {
+    position: absolute;
+    inset: 0;
+
+    content: '';
+
+    /* @formatter:off */
+    background-image:
+        linear-gradient(to right, oklch(21% 0.006 285.885) 1px, transparent 1px),
+        linear-gradient(to bottom, oklch(21% 0.006 285.885) 1px, transparent 1px);
+    background-size: 32px 32px;
+    /* @formatter:on */
+
+    -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000000 25%, transparent 75%);
+    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000000 25%, transparent 75%);
+
+    z-index: -1;
 }
