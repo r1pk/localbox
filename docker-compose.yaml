@@ -5,12 +5,13 @@ services:
         build:
             context: .
             dockerfile: ./docker/frankenphp/Dockerfile
+            target: development
         ports:
             - "${DOCKER_HOST_PORT:-8000}:80"
         volumes:
             - "./docker/frankenphp/Caddyfile:/etc/frankenphp/Caddyfile:ro"
-            - "./docker/frankenphp/conf.d/default.ini:/usr/local/etc/php/conf.d/default.ini:ro"
-            - "./docker/frankenphp/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/zz-xdebug.ini:ro"
+            - "./docker/frankenphp/conf.d/php.development.ini:/usr/local/etc/php/conf.d/php.development.ini:ro"
+            - "./docker/frankenphp/conf.d/xdebug.development.ini:/usr/local/etc/php/conf.d/zz-xdebug.ini:ro"
             - "./storage:/storage"
             - "./:/app"
         extra_hosts:
