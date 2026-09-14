@@ -29,7 +29,7 @@
 - **PHP**: version 8.4 or higher
 - **Composer**: version 2.8 or higher
 - **SQLite**: version 3 or higher (bundled with PHP via the `pdo_sqlite` extension)
-- **Web Server:** Nginx, Apache, or any other compatible web server
+- **Web Server:** FrankenPHP (bundled with the Docker setup), or any compatible web server (e.g. Nginx, Apache) for a manual setup
 - **Symfony CLI** (optional, for local development)
 - **Docker** (optional, for containerized setup)
 
