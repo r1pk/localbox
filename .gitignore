@@ -3,9 +3,9 @@
 ###< miscellaneous ###
 
 ###> environment variables ###
-.env
-.env.*
-!.env.default
+/.env
+/.env.*
+!/.env.default
 ###< environment variables ###
 
 ###> symfony/framework-bundle ###
@@ -25,5 +25,5 @@
 ###< friendsofphp/php-cs-fixer ###
 
 ###> phpstan/phpstan ###
-phpstan.neon
+/phpstan.neon
 ###< phpstan/phpstan ###
