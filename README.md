@@ -55,7 +55,7 @@ LocalBox provides a ready-to-use Docker configuration, but it can also be set up
 3. Run the setup script inside the PHP container:
 
    ```bash
-   docker compose exec php bash -c "bash /var/www/localbox/setup.sh"
+   docker compose exec php bash -c "bash /app/setup.sh"
    ```
 
 ### Manual setup
@@ -99,7 +99,7 @@ LocalBox is configured using environment files. For a quick setup, the default c
 The `LOCAL_STORAGE_DIRECTORY` environment variable defines the location where uploaded files will be stored.
 
 ```
-LOCAL_STORAGE_DIRECTORY=/var/www/storage
+LOCAL_STORAGE_DIRECTORY=/storage
 ```
 
 Make sure the location exists and that the PHP process has permission to read, write, and delete files.
