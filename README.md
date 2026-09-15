@@ -1,113 +1,98 @@
 <div align="center">
   <h1>LocalBox</h1>
+  <p>Lightweight, self-hosted file sharing for your local network.</p>
   <p>
-    LocalBox is a lightweight file hosting solution for quick file sharing between devices on a local network. Built with <b>PHP 8</b>, <b>Symfony 8</b>, <b>Tailwind CSS 4</b>, and <b>SQLite</b>.
-  </p>
-  <p>
-    <img alt="PHP 8" src="https://img.shields.io/badge/PHP-v8-777BB4?style=for-the-badge&logo=php">
-    <img alt="Symfony 8" src="https://img.shields.io/badge/Symfony-v8-000000?style=for-the-badge&logo=symfony">
-    <img alt="Tailwind CSS 4" src="https://img.shields.io/badge/Tailwind%20CSS-v4-06B6D4?style=for-the-badge&logo=tailwindcss">
-    <img alt="SQLite 3" src="https://img.shields.io/badge/SQLite-v3-003B57?style=for-the-badge&logo=sqlite">
+    <img alt="PHP 8" src="https://img.shields.io/badge/PHP-8-777BB4?style=for-the-badge&logo=php">
+    <img alt="Symfony 8" src="https://img.shields.io/badge/Symfony-8-000000?style=for-the-badge&logo=symfony">
+    <img alt="Tailwind CSS 4" src="https://img.shields.io/badge/Tailwind%20CSS-4-06B6D4?style=for-the-badge&logo=tailwindcss">
+    <img alt="SQLite 3" src="https://img.shields.io/badge/SQLite-3-003B57?style=for-the-badge&logo=sqlite">
     <img alt="Docker ready" src="https://img.shields.io/badge/Docker-ready-2496ED?style=for-the-badge&logo=docker">
-    <img alt="License MIT" src="https://img.shields.io/badge/License-MIT-42b883?style=for-the-badge" >
+    <img alt="License MIT" src="https://img.shields.io/badge/License-MIT-42b883?style=for-the-badge">
   </p>
 </div>
 
-## Features
+## Overview
 
-- Simple interface for quick file uploads and downloads.
-- Automatic upload strategy selection based on file size and server limits.
-- Automatic grouping of files uploaded together.
-- Admin panel for managing files and users.
+LocalBox is a small file sharing application for quickly moving files between devices on the same network. It's designed to be minimal and easy to run in a container.
+
+- Drag-and-drop uploads that switch between direct and chunked transfer automatically, so large files upload reliably.
+- Files uploaded together are grouped and shared through a single link.
+- Minimal, distraction-free interface focused on the task at hand.
+- Admin dashboard for managing uploaded files and user accounts.
 
 ## Preview
 
 ![LocalBox Preview GIF](PREVIEW.gif)
 
-## Requirements
+## Getting started
 
-- **PHP**: version 8.4 or higher
-- **Composer**: version 2.8 or higher
-- **SQLite**: version 3 or higher (bundled with PHP via the `pdo_sqlite` extension)
-- **Web Server:** FrankenPHP (bundled with the Docker setup), or any compatible web server (e.g. Nginx, Apache) for a manual setup
-- **Symfony CLI** (optional, for local development)
-- **Docker** (optional, for containerized setup)
+### 1. Run with Docker
 
-## Quick start
+For the fastest setup, run the prebuilt Docker image:
 
-LocalBox provides a ready-to-use Docker configuration, but it can also be set up manually.
+```bash
+docker run -d \
+  --name localbox \
+  -p 8000:80 \
+  -v localbox-var:/app/var \
+  -v localbox-storage:/storage \
+  ghcr.io/r1pk/localbox:latest
+```
 
-### Docker setup (recommended)
+Once launched, the application is available on the host's port `8000`, with two named volumes that keep your data intact between restarts:
 
-1. Clone the repository:
+- `localbox-var` - stores the application's working data, including the SQLite database.
+- `localbox-storage` - stores the uploaded files.
 
-   ```bash
-   git clone https://github.com/r1pk/localbox.git
-   cd localbox
-   ```
+### 2. Open the application
 
-2. Start the Docker environment:
+Two entry points become available once the container is running:
 
-   ```bash
-   docker compose up -d --build
-   ```
+- Home ([http://127.0.0.1:8000](http://127.0.0.1:8000)) - the public-facing page where users upload files and share them with others.
 
-3. Run the setup script inside the PHP container:
+- Admin dashboard ([http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)) - a simple panel for reviewing uploaded files and managing user accounts.
 
-   ```bash
-   docker compose exec php bash -c "bash /app/setup.sh"
-   ```
-
-### Manual setup
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/r1pk/localbox.git
-   cd localbox
-   ```
-
-2. Run the setup script:
-
-   ```bash
-   bash setup.sh
-   ```
-
-3. Start the local Symfony server:
-
-   ```bash
-   symfony server:start
-   ```
-
-   Alternatively, configure your web server (e.g., **Nginx** or **Apache**) to point to the `public` directory.
-
-## Usage
-
-Once the setup is complete, open one of the following URLs in your web browser:
-
-- http://127.0.0.1:8000 - to use the application
-- http://127.0.0.1:8000/admin - to access the admin panel and manage uploaded files and user accounts
-
-Default credentials for the admin panel: `admin` / `admin`
+> [!IMPORTANT]
+> Default credentials are `admin` / `admin`.
 
 ## Configuration
 
-LocalBox is configured using environment files. For a quick setup, the default configuration is usually sufficient to run the project.
+Everything is set through environment variables. Each variable has a sensible default, so no further configuration is typically required.
 
-### Upload storage directory
+| Variable                  | Default                                        | Description                                   |
+|---------------------------|------------------------------------------------|-----------------------------------------------|
+| `LOCAL_STORAGE_DIRECTORY` | `/storage`                                     | Absolute path where uploaded files are saved. |
+| `DATABASE_URL`            | `sqlite:///%kernel.project_dir%/var/sqlite.db` | Doctrine DSN for the database.                |
 
-The `LOCAL_STORAGE_DIRECTORY` environment variable defines the location where uploaded files will be stored.
+## Development
 
+The repository includes a Docker Compose configuration that mirrors the production setup and enables debugging tools such as Xdebug, making it the recommended way to develop the project.
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/r1pk/localbox.git
+cd localbox
 ```
-LOCAL_STORAGE_DIRECTORY=/storage
+
+2. Build and start the containers:
+
+```bash
+docker compose up -d --build
 ```
 
-Make sure the location exists and that the PHP process has permission to read, write, and delete files.
+3. Run the setup script to prepare the application and create the default admin user:
+
+```bash
+docker compose exec php bash /app/setup.sh
+```
+
+Once the setup completes, the application is available at [http://127.0.0.1:8000](http://127.0.0.1:8000).
+
+## License
+
+Licensed under the [MIT License](LICENSE.md).
 
 ## Author
 
 **Patryk Krawczyk** - [@r1pk](https://github.com/r1pk)
-
-## License
-
-This project is licensed under the [MIT License](LICENSE.md).
