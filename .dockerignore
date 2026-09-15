@@ -1,21 +1,37 @@
+###> miscellaneous ###
 /.git
 /.idea
+###< miscellaneous ###
 
+###> environment variables ###
 /.env
 /.env.*
 !/.env.default
+###< environment variables ###
 
-/node_modules/
-/vendor/
-
+###> symfony/framework-bundle ###
+/public/bundles/
 /var/
-/storage/
+/vendor/
+###< symfony/framework-bundle ###
 
-/README.md
-/PREVIEW.gif
+###> symfony/asset-mapper ###
+/assets/vendor/
+/public/assets/
+###< symfony/asset-mapper ###
 
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
 /.php-cs-fixer.dist.php
 /.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
 
+###> phpstan/phpstan ###
 /phpstan.dist.neon
 /phpstan.neon
+###< phpstan/phpstan ###
+
+###> other ###
+/README.md
+/PREVIEW.gif
+###> other ###
