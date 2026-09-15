@@ -13,7 +13,7 @@
 
 ## Overview
 
-LocalBox is a small file sharing application for quickly moving files between devices on the same network. It keeps the setup minimal and easy to run in a container.
+LocalBox is a small file sharing application for quickly moving files between devices on the same network. It's designed to be minimal and easy to run in a container.
 
 - Drag-and-drop uploads that switch between direct and chunked transfer automatically, so large files upload reliably.
 - Files uploaded together are grouped and shared through a single link.
@@ -39,7 +39,7 @@ docker run -d \
   ghcr.io/r1pk/localbox:latest
 ```
 
-Once launched, the application is available on port `8000` of the host, with two named volumes that keep your data intact between restarts:
+Once launched, the application is available on the host's port `8000`, with two named volumes that keep your data intact between restarts:
 
 - `localbox-var` - stores the application's working data, including the SQLite database.
 - `localbox-storage` - stores the uploaded files.
@@ -50,7 +50,7 @@ Two entry points become available once the container is running:
 
 - Home ([http://127.0.0.1:8000](http://127.0.0.1:8000)) - the public-facing page where users upload files and share them with others.
 
-- Admin dashboard ([http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)) - a simple dashboard for reviewing uploaded files and managing user accounts.
+- Admin dashboard ([http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)) - a simple panel for reviewing uploaded files and managing user accounts.
 
 > [!IMPORTANT]
 > Default credentials are `admin` / `admin`.
