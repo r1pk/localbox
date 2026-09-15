@@ -40,6 +40,8 @@ RUN composer install \
 COPY . .
 RUN cp .env.default .env \
     && composer dump-autoload --no-dev --optimize --classmap-authoritative \
+    && php bin/console assets:install \
+    && php bin/console importmap:install \
     && php bin/console tailwind:build --minify \
     && php bin/console asset-map:compile \
     && php bin/console cache:warmup
