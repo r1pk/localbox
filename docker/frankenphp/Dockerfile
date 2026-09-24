@@ -15,6 +15,10 @@ FROM base AS development
 
 COPY --from=composer:2.8.12 /usr/bin/composer /usr/local/bin/composer
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git unzip \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN install-php-extensions xdebug
 # ==== development ====
 
@@ -22,6 +26,7 @@ RUN install-php-extensions xdebug
 FROM base AS builder
 
 ENV APP_ENV=prod
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
 COPY --from=composer:2.8.12 /usr/bin/composer /usr/local/bin/composer
 
@@ -33,18 +38,20 @@ COPY composer.json composer.lock symfony.lock ./
 RUN composer install \
         --no-dev \
         --no-scripts \
+        --no-autoloader \
         --no-interaction \
-        --prefer-dist \
-        --optimize-autoloader
+        --no-progress \
+        --prefer-dist
 
 COPY . .
 RUN cp .env.default .env \
-    && composer dump-autoload --no-dev --optimize --classmap-authoritative \
+    && composer dump-autoload --no-dev --classmap-authoritative \
     && php bin/console assets:install \
     && php bin/console importmap:install \
     && php bin/console tailwind:build --minify \
     && php bin/console asset-map:compile \
-    && php bin/console cache:warmup
+    && php bin/console cache:warmup \
+    && rm -rf var/tailwind
 # ==== builder ====
 
 # ==== production ====
