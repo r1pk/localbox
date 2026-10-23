@@ -27,3 +27,8 @@
 ###> phpstan/phpstan ###
 /phpstan.neon
 ###< phpstan/phpstan ###
+
+###> uploaded files ###
+/storage/*
+!/storage/.gitkeep
+###< uploaded files ###
